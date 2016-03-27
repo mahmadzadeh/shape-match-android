@@ -7,10 +7,12 @@ public class GameLevel {
 
     public static int MAX_LEVEL_SHAPE_COUNT = CellGrid.GRID_ROW_CNT * CellGrid.GRID_COL_CNT;
 
+    public static GameLevel levelOne = new GameLevel(1);
+    public static GameLevel initialLevel = levelOne;
+
     private int shapeCount;
 
     public GameLevel(int shapeCnt) {
-
         shapeCount = shapeCnt;
     }
 

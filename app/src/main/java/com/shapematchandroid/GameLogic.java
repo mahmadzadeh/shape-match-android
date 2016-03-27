@@ -2,7 +2,10 @@ package com.shapematchandroid;
 
 
 import com.shapematchandroid.grid.CellGridPair;
-import com.shapematchandroid.grid.CellGridUtil;
+
+import static com.shapematchandroid.GameLevel.initialLevel;
+import static com.shapematchandroid.Score.initialScore;
+import static com.shapematchandroid.grid.CellGridUtil.getShapesForLevel;
 
 public class GameLogic {
 
@@ -22,10 +25,6 @@ public class GameLogic {
         this.isGameOver = isGameOver;
     }
 
-    public void start() {
-
-    }
-
     public GameLogic evaluateUserInput(UserInput userInput) {
         return userInput == UserInput.Match
                 ? gameLogicBasedOnUserSelection(cellGridPair.leftGrid().equals(cellGridPair.rightGrid()))
@@ -38,14 +37,14 @@ public class GameLogic {
             int corrAnswers = determineCorrectAnswerCount(level);
            return new GameLogic(
                     level,
-                    CellGridUtil.getShapesForLevel(level),
+                    getShapesForLevel(level),
                     corrAnswers,
                     score.add(level.points()),
                     false);
         } else {
             return new GameLogic(
                     currentLevel,
-                    CellGridUtil.getShapesForLevel(currentLevel),
+                    getShapesForLevel(currentLevel),
                     correctAnswers,
                     score.deduct(currentLevel.points()),
                     false);
@@ -61,7 +60,6 @@ public class GameLogic {
                 ? currentLevel.nextLevel()
                 :currentLevel;
     }
-
 
     public GameLevel currentLevel() {
         return currentLevel;
@@ -79,7 +77,24 @@ public class GameLogic {
         return score;
     }
 
+    public boolean isGameOver() {
+        return  isGameOver;
+    }
+
     public boolean isMatchingPairShapes() {
         return  cellGridPair.leftGrid().equals(cellGridPair.rightGrid());
+    }
+
+    public GameLogic markGameAsFinished() {
+        return new GameLogic(currentLevel, cellGridPair, correctAnswers, score, true);
+    }
+
+    public GameLogic reset() {
+        return new GameLogic(
+                initialLevel,
+                getShapesForLevel(initialLevel),
+                0,
+                initialScore,
+                false);
     }
 }

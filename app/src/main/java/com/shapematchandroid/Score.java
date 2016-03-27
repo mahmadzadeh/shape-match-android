@@ -3,7 +3,9 @@ package com.shapematchandroid;
 
 public class Score {
 
-   private int points;
+    public static final Score initialScore = new Score(0);
+
+    private int points;
 
     public Score(int points) {
         this.points = points;
@@ -13,7 +15,7 @@ public class Score {
         return new Score(points += pts);
     }
 
-    public Score deduct(int pts ) {
+    public Score deduct(int pts) {
         return new Score(points -= pts);
     }
 
