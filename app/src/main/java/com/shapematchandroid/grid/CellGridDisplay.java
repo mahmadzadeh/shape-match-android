@@ -37,8 +37,8 @@ public class CellGridDisplay {
         layout.invalidate();
         layout.removeAllViews();
 
-        List<List<Cell>> lgrid = cellGridPair.getLeft().populateGridCells();
-        List<List<Cell>> rgrid = cellGridPair.getRight().populateGridCells();
+        List<List<Cell>> lgrid = cellGridPair.leftGrid().populateGridCells();
+        List<List<Cell>> rgrid = cellGridPair.rightGrid().populateGridCells();
 
         LeftGridOrientation leftGridOrientation = new LeftGridOrientation(displayWindow.topLeftCornerOfLeftGrid(), displayWindow.oneCellDimension());
         RightGridOrientation rightGridOrientation = new RightGridOrientation(displayWindow.topLeftCornerOfRightGrid(), displayWindow.oneCellDimension());

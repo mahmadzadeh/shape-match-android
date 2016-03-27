@@ -1,8 +1,6 @@
 package com.shapematchandroid.shape;
 
 import com.shapematchandroid.GameLevel;
-import com.shapematchandroid.shape.Shape;
-import com.shapematchandroid.shape.ShapeSelector;
 
 import org.junit.Test;
 
@@ -11,7 +9,9 @@ import java.util.List;
 
 import static com.shapematchandroid.shape.ShapeSelector.select;
 import static com.shapematchandroid.shape.ShapeSelector.selectOneRandomShape;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 
 public class ShapeSelectorTest {
@@ -25,7 +25,7 @@ public class ShapeSelectorTest {
                 new GameLevel(200));
 
         for( GameLevel gameLevel : gameLevels) {
-            assertEquals(gameLevel.getPoints(), select(gameLevel).size());
+            assertEquals(gameLevel.points(), select(gameLevel).size());
         }
     }
 

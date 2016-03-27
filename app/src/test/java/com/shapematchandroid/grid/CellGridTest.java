@@ -1,14 +1,9 @@
 package com.shapematchandroid.grid;
 
-import com.shapematchandroid.grid.Cell;
-import com.shapematchandroid.grid.CellGrid;
-import com.shapematchandroid.grid.EmptyCell;
+import com.shapematchandroid.shape.FourSquare;
 import com.shapematchandroid.shape.HollowSquare;
-import com.shapematchandroid.shape.NullShape;
-import com.shapematchandroid.shape.Shape;
 import com.shapematchandroid.shape.ShapeSlotPair;
 import com.shapematchandroid.shape.SolidSquare;
-import com.shapematchandroid.util.IntegerRange;
 
 import org.junit.Test;
 
@@ -18,6 +13,7 @@ import java.util.List;
 import static com.shapematchandroid.grid.CellGrid.GRID_COL_CNT;
 import static com.shapematchandroid.grid.CellGrid.GRID_ROW_CNT;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotSame;
 import static junit.framework.Assert.assertTrue;
 
@@ -94,6 +90,57 @@ public class CellGridTest {
         assertNotSame(originalGrid, newGrid);
 
         assertEquals( originalShapeCount , newGrid.getShapeSlotPairCount());
+    }
+
+    @Test
+    public void isEqualReturnsTrueWhenTwoGridsAreEqual() {
+        List<ShapeSlotPair> pairs1 = new ArrayList<ShapeSlotPair>(){{
+            add(new ShapeSlotPair(new HollowSquare(), 0));
+            add(new ShapeSlotPair(new HollowSquare(), 0));
+        }};
+        List<ShapeSlotPair> pairs2 = new ArrayList<ShapeSlotPair>(){{
+            add(new ShapeSlotPair(new HollowSquare(), 0));
+            add(new ShapeSlotPair(new HollowSquare(), 0));
+        }};
+
+        CellGrid grid = new CellGrid(pairs1);
+        CellGrid anotherGrid = new CellGrid(pairs2);
+
+        assertTrue(grid.equals(anotherGrid));
+    }
+
+    @Test
+    public void isEqualReturnsFalseWhenTwoGridsAreNotEqual() {
+        List<ShapeSlotPair> pairs1 = new ArrayList<ShapeSlotPair>(){{
+            add(new ShapeSlotPair(new HollowSquare(), 0));
+            add(new ShapeSlotPair(new HollowSquare(), 0));
+        }};
+        List<ShapeSlotPair> pairs2 = new ArrayList<ShapeSlotPair>(){{
+            add(new ShapeSlotPair(new HollowSquare(), 0));
+            add(new ShapeSlotPair(new HollowSquare(), 1));
+        }};
+
+        CellGrid grid = new CellGrid(pairs1);
+        CellGrid anotherGrid = new CellGrid(pairs2);
+
+        assertFalse(grid.equals(anotherGrid));
+    }
+
+    @Test
+    public void isEqualReturnsFalseWhenOneGridHasShapeThatDoesNotMatch() {
+        List<ShapeSlotPair> pairs1 = new ArrayList<ShapeSlotPair>(){{
+            add(new ShapeSlotPair(new HollowSquare(), 0));
+            add(new ShapeSlotPair(new HollowSquare(), 0));
+        }};
+        List<ShapeSlotPair> pairs2 = new ArrayList<ShapeSlotPair>(){{
+            add(new ShapeSlotPair(new HollowSquare(), 0));
+            add(new ShapeSlotPair(new FourSquare(), 0));
+        }};
+
+        CellGrid grid = new CellGrid(pairs1);
+        CellGrid anotherGrid = new CellGrid(pairs2);
+
+        assertFalse(grid.equals(anotherGrid));
     }
 
     private int  filterEmptyCellCount(List<List<Cell>> grid ) {

@@ -2,7 +2,8 @@ package com.shapematchandroid;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class GameLevelTest {
 
@@ -16,7 +17,7 @@ public class GameLevelTest {
     public void canCreateInstancOfNextGameLevel() {
         GameLevel level2 = new GameLevel(1).nextLevel();
 
-        assertEquals(2, level2.getPoints());
+        assertEquals(2, level2.points());
     }
 
     @Test

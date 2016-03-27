@@ -1,0 +1,22 @@
+package com.shapematchandroid;
+
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
+
+public class ScoreTest {
+
+    @Test
+    public void givenCurrentSooreWhenCorrectAnswerGivenThenPointsAddedToCurrentScor(){
+        Score score = new Score(10);
+        assertEquals( 20, score.add(10).points());
+    }
+
+    @Test
+    public void givenCurrentScoreWhenIncorrectAnswerGivenThenPointsDeducted() {
+        Score score = new Score(10);
+
+        assertEquals(0, score.deduct(10).points());
+    }
+}

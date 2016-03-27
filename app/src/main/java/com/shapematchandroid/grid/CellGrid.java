@@ -42,16 +42,6 @@ public class CellGrid {
         return grid;
     }
 
-    private ShapeSlotPair getMatchingShapeSlotTuple(int index) {
-        for (ShapeSlotPair pair : shapeSlotPairs) {
-            if (pair.getSlot() == index) {
-                return pair;
-            }
-        }
-
-        return null;
-    }
-
     /**
      * There is 50% chance that this method will return a CellGrid that has one
      * shape replaced.
@@ -86,9 +76,40 @@ public class CellGrid {
         return shapeSlotPairs.size();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+
+        CellGrid otherGrid = (CellGrid) other;
+
+        return shapeSlotPairs.containsAll(otherGrid.getShapeSlotPairs())
+                && otherGrid.getShapeSlotPairs().containsAll(shapeSlotPairs);
+    }
+
+    public boolean isNotEqual(Object other) {
+        return !equals(other);
+    }
+
+    @Override
+    public int hashCode() {
+        return getShapeSlotPairs().hashCode();
+    }
+
     private Integer toIndex(int r, int c) {
         return (GRID_ROW_CNT * r) + c;
     }
+
+    private ShapeSlotPair getMatchingShapeSlotTuple(int index) {
+        for (ShapeSlotPair pair : shapeSlotPairs) {
+            if (pair.getSlot() == index) {
+                return pair;
+            }
+        }
+
+        return null;
+    }
+
 
     private void debugPrintGridStat(List<List<Cell>> grid) {
         int ec = 0;

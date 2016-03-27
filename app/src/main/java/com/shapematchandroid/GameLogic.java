@@ -1,0 +1,85 @@
+package com.shapematchandroid;
+
+
+import com.shapematchandroid.grid.CellGridPair;
+import com.shapematchandroid.grid.CellGridUtil;
+
+public class GameLogic {
+
+    public final static int REQUIRED_CORRECT_CONSECUTIVE_ANSWERES = 2;
+
+    private final GameLevel currentLevel;
+    private final CellGridPair cellGridPair;
+    private final int correctAnswers;
+    private final Score score;
+    private boolean isGameOver;
+
+    public GameLogic(GameLevel currentLevel, CellGridPair cellGridPair, int correctAnswers, Score score, boolean isGameOver) {
+        this.currentLevel = currentLevel;
+        this.cellGridPair = cellGridPair;
+        this.correctAnswers = correctAnswers;
+        this.score = score;
+        this.isGameOver = isGameOver;
+    }
+
+    public void start() {
+
+    }
+
+    public GameLogic evaluateUserInput(UserInput userInput) {
+        return userInput == UserInput.Match
+                ? gameLogicBasedOnUserSelection(cellGridPair.leftGrid().equals(cellGridPair.rightGrid()))
+                : gameLogicBasedOnUserSelection(cellGridPair.leftGrid().isNotEqual(cellGridPair.rightGrid()));
+    }
+
+    private GameLogic gameLogicBasedOnUserSelection( Boolean shapesEquality ) {
+        if (shapesEquality) {
+            GameLevel level = determineGameLevel();
+            int corrAnswers = determineCorrectAnswerCount(level);
+           return new GameLogic(
+                    level,
+                    CellGridUtil.getShapesForLevel(level),
+                    corrAnswers,
+                    score.add(level.points()),
+                    false);
+        } else {
+            return new GameLogic(
+                    currentLevel,
+                    CellGridUtil.getShapesForLevel(currentLevel),
+                    correctAnswers,
+                    score.deduct(currentLevel.points()),
+                    false);
+        }
+    }
+
+    private int determineCorrectAnswerCount(GameLevel level ) {
+        return level == currentLevel? correctAnswers + 1:  0;
+    }
+
+    private GameLevel determineGameLevel() {
+        return correctAnswers == (REQUIRED_CORRECT_CONSECUTIVE_ANSWERES - 1)
+                ? currentLevel.nextLevel()
+                :currentLevel;
+    }
+
+
+    public GameLevel currentLevel() {
+        return currentLevel;
+    }
+
+    public CellGridPair cellGridPair() {
+        return cellGridPair;
+    }
+
+    public int correctAnswers() {
+        return correctAnswers;
+    }
+
+    public Score score() {
+        return score;
+    }
+
+    public boolean isMatchingPairShapes() {
+        return  cellGridPair.leftGrid().equals(cellGridPair.rightGrid());
+    }
+}

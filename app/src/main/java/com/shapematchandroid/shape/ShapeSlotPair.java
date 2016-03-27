@@ -25,7 +25,16 @@ public class ShapeSlotPair {
 
         ShapeSlotPair that = (ShapeSlotPair)other;
 
-        return shape.equals(that.shape)
-                && this.slot ==that.slot;
+        boolean shapesEquals = shape.equals(that.shape);
+        boolean slotsAreEquals = slot.equals(that.slot);
+
+        return shapesEquals && slotsAreEquals;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getShape().hashCode();
+        result = 31 * result + getSlot().hashCode();
+        return result;
     }
 }

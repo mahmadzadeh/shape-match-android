@@ -10,11 +10,11 @@ public class CellGridPair {
         this.right = right;
     }
 
-    public CellGrid getLeft() {
+    public CellGrid leftGrid() {
         return left;
     }
 
-    public CellGrid getRight() {
+    public CellGrid rightGrid() {
         return right;
     }
 }

@@ -16,6 +16,14 @@ public class Cell {
                 (shape !=null ? shape.toString() : " - " );
     }
 
+    public Shape getShape() {
+        return shape;
+    }
+
+    public int getShapeResourceId() {
+        return shape.getResourceId();
+    }
+
     public boolean equals(Object other ) {
         if ( this == other ) return true;
         if ( !(other instanceof Cell) ) return false;
@@ -25,11 +33,8 @@ public class Cell {
         return this.shape.equals(that.shape);
     }
 
-    public Shape getShape() {
-        return shape;
-    }
-
-    public int getShapeResourceId() {
-        return shape.getResourceId();
+    @Override
+    public int hashCode() {
+        return shape.hashCode();
     }
 }

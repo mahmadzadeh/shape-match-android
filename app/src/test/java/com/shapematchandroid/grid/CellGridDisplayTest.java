@@ -5,7 +5,6 @@ import android.widget.RelativeLayout;
 
 import com.shapematchandroid.GameLevel;
 import com.shapematchandroid.GridIndex;
-import com.shapematchandroid.ImageAttribute;
 import com.shapematchandroid.ImageViewWrapper;
 import com.shapematchandroid.util.CellMargin;
 import com.shapematchandroid.util.Dimension;
@@ -14,8 +13,6 @@ import com.shapematchandroid.util.DisplayWindow;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +21,6 @@ import static com.shapematchandroid.grid.CellGrid.GRID_COL_CNT;
 import static com.shapematchandroid.grid.CellGrid.GRID_ROW_CNT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 public class CellGridDisplayTest {
@@ -37,7 +33,7 @@ public class CellGridDisplayTest {
 
         CellGridDisplay gridDisplay = new CellGridDisplay(mock(CellGridPair.class), mock(RelativeLayout.class), mock(Context.class));
 
-        CellGrid cellGrid =  CellGridUtil.getShapesForLevel(new GameLevel(GRID_ROW_CNT * GRID_COL_CNT)).getLeft();
+        CellGrid cellGrid =  CellGridUtil.getShapesForLevel(new GameLevel(GRID_ROW_CNT * GRID_COL_CNT)).leftGrid();
 
         List<List<Cell>> populatedCells = cellGrid.populateGridCells();
 

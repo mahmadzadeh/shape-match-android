@@ -14,7 +14,7 @@ public abstract class Shape {
 
         Shape that = (Shape)other;
 
-        return this.resourceId ==that.resourceId;
+        return this.resourceId.equals(that.resourceId);
     }
 
     public Integer getResourceId() {

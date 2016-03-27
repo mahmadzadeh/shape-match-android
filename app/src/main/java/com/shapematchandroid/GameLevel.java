@@ -23,11 +23,27 @@ public class GameLevel {
     }
     // for now the points for each level is equal to the
     // shape count presented in that level.
-    public int getPoints() {
+    public int points() {
         return getShapeCount();
     }
 
     public int getShapeCount() {
         return shapeCount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GameLevel gameLevel = (GameLevel) o;
+
+        return getShapeCount() == gameLevel.getShapeCount();
+
+    }
+
+    @Override
+    public int hashCode() {
+        return getShapeCount();
     }
 }
