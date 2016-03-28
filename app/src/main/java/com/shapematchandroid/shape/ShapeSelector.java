@@ -51,7 +51,7 @@ public class ShapeSelector {
 
             it = selectOneRandomShape();
 
-        } while (it == shape);
+        } while (it.equals(shape));
 
         return it;
     }

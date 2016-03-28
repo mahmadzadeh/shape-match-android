@@ -3,4 +3,6 @@
     <string name="start_game">Start Game</string>
     <string name="action_settings">Title</string>
     <string name="title_activity_game">GameActivity</string>
+    <string name="match_button_string">Match</string>
+    <string name="mismatch_button_string">Mismatch</string>
 </resources>

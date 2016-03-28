@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.shapematchandroid.GridIndex;
+import com.shapematchandroid.GameButtons;
 import com.shapematchandroid.ImageViewWrapper;
 import com.shapematchandroid.util.Dimension;
 import com.shapematchandroid.util.DisplayWindow;
@@ -25,12 +25,14 @@ public class CellGridDisplay {
     private final Random random = new Random(System.currentTimeMillis());
     private final Context context;
     private final DisplayWindow displayWindow;
+    private final GameButtons gameButtons;
 
-    public CellGridDisplay(CellGridPair cellGridPair, RelativeLayout layout, Context context) {
+    public CellGridDisplay(CellGridPair cellGridPair, GameButtons gameButtons, RelativeLayout layout, Context context) {
         this.cellGridPair = cellGridPair;
         this.layout = layout;
         this.context = context;
         this.displayWindow = new DisplayWindow(new Dimension(layout.getWidth(), layout.getHeight()));
+        this.gameButtons = gameButtons;
     }
 
     public void displayOnScreen() {
@@ -45,6 +47,26 @@ public class CellGridDisplay {
 
         display(transformToImageViewWrapperGrid(lgrid), leftGridOrientation);
         display(transformToImageViewWrapperGrid(rgrid), rightGridOrientation);
+        display(gameButtons);
+    }
+
+    private void display(GameButtons matchButton) {
+        Dimension buttonDimension = displayWindow.singleButtonDimension();
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                cast(buttonDimension.getWidth()), cast(buttonDimension.getHeight()));
+
+        params.leftMargin = cast(displayWindow.topLeftCornerOfLeftButton().getLeftMargin());
+        params.topMargin = cast(displayWindow.topLeftCornerOfLeftButton().getTopMargin());
+
+        layout.addView(matchButton.getMatchButton(), params);
+
+        RelativeLayout.LayoutParams mismatchParams = new RelativeLayout.LayoutParams(
+                cast(buttonDimension.getWidth()), cast(buttonDimension.getHeight()));
+
+        mismatchParams.leftMargin = cast(displayWindow.topLeftCornerOfRightButton().getLeftMargin());
+        mismatchParams.topMargin = cast(displayWindow.topLeftCornerOfRightButton().getTopMargin());
+
+        layout.addView(matchButton.getMismatchButton(), mismatchParams);
     }
 
     private int generateViewId() {
@@ -86,7 +108,8 @@ public class CellGridDisplay {
             ImageView imageView = imageViewWrapper.getImageViewWithAttributesAdded();
             int w = cast(oneCellDimension.getWidth());
             int h = cast(oneCellDimension.getHeight());
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(w, h);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(w, h);
+            params.setMargins(0,0,0,0);
             ll.addView(imageView, params);
         }
         return ll;
@@ -103,14 +126,5 @@ public class CellGridDisplay {
 
         return params;
     }
-
-    public GridIndex getLeftNeighbourTo(GridIndex gridIndex) {
-        return gridIndex.oneToLeft();
-    }
-
-    public GridIndex getNeighbourAbove(GridIndex gridIndex) {
-        return gridIndex.oneAbove();
-    }
-
 
 }

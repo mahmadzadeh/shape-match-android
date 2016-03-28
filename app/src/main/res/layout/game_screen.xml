@@ -10,5 +10,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".GameScreenActivity"
     android:background="@color/startScreenBackground">
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dip"
+        android:text="@string/match_button_string" >
+    </Button>
 
 </RelativeLayout>

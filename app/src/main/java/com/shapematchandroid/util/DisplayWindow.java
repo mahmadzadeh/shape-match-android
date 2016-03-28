@@ -1,10 +1,10 @@
 package com.shapematchandroid.util;
 
 public class DisplayWindow {
-    public static final double LEFT_GUTTER_WIDTH_PERCENTAGE = 0.04;
+    public static final double LEFT_GUTTER_WIDTH_PERCENTAGE = 0.02;
     public static final double LEFT_GUTTER_HEIGHT_PERCENTAGE = 0.15;
 
-    public static final double LEFT_BUTTON_WIDTH_PERCENTAGE = 0.25;
+    public static final double LEFT_BUTTON_WIDTH_PERCENTAGE = 0.20;
     public static final double LEFT_BUTTON_HEIGHT_PERCENTAGE = 0.65;
 
     public static final double RIGHT_GRID_WIDTH_PERCENTAGE = 0.61;
@@ -43,6 +43,10 @@ public class DisplayWindow {
 
     public Dimension oneCellDimension() {
         return new Dimension( screenDimension.getWidth() * 0.053, screenDimension.getHeight() * 0.067);
+    }
+
+    public Dimension singleButtonDimension() {
+        return new Dimension( screenDimension.getWidth() * 0.22, screenDimension.getHeight() * 0.20);
     }
 
     @Override
