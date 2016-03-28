@@ -1,12 +1,19 @@
-package com.shapematchandroid.grid;
+package com.shapematchandroid.ui;
 
 import android.content.Context;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 
-import com.shapematchandroid.GameButtons;
 import com.shapematchandroid.ImageViewWrapper;
+import com.shapematchandroid.R;
+import com.shapematchandroid.grid.Cell;
+import com.shapematchandroid.grid.CellGridPair;
+import com.shapematchandroid.grid.LeftGridOrientation;
+import com.shapematchandroid.grid.Orientation;
+import com.shapematchandroid.grid.RightGridOrientation;
 import com.shapematchandroid.util.Dimension;
 import com.shapematchandroid.util.DisplayWindow;
 
@@ -35,7 +42,7 @@ public class CellGridDisplay {
         this.gameButtons = gameButtons;
     }
 
-    public void displayOnScreen() {
+    public void displayOnScreen(int points) {
         layout.invalidate();
         layout.removeAllViews();
 
@@ -48,25 +55,48 @@ public class CellGridDisplay {
         display(transformToImageViewWrapperGrid(lgrid), leftGridOrientation);
         display(transformToImageViewWrapperGrid(rgrid), rightGridOrientation);
         display(gameButtons);
+        displayScore(points);
     }
 
-    private void display(GameButtons matchButton) {
+    private void display(GameButtons gameButtons) {
+
         Dimension buttonDimension = displayWindow.singleButtonDimension();
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+
+        layout.addView(gameButtons.getMismatchButton(), layoutParamsFor(buttonDimension,
+                displayWindow.topLeftCornerOfLeftButton().getLeftMargin(),
+                displayWindow.topLeftCornerOfLeftButton().getTopMargin()));
+
+        layout.addView(gameButtons.getMatchButton(), layoutParamsFor(buttonDimension,
+                displayWindow.topLeftCornerOfRightButton().getLeftMargin(),
+                displayWindow.topLeftCornerOfRightButton().getTopMargin()));
+    }
+
+    private LayoutParams layoutParamsFor(Dimension buttonDimension, double leftMargin, double topMargin) {
+        LayoutParams mismatchParams = new LayoutParams(
                 cast(buttonDimension.getWidth()), cast(buttonDimension.getHeight()));
 
-        params.leftMargin = cast(displayWindow.topLeftCornerOfLeftButton().getLeftMargin());
-        params.topMargin = cast(displayWindow.topLeftCornerOfLeftButton().getTopMargin());
+        mismatchParams.leftMargin = cast(leftMargin);
+        mismatchParams.topMargin = cast(topMargin);
 
-        layout.addView(matchButton.getMatchButton(), params);
+        return mismatchParams;
+    }
 
-        RelativeLayout.LayoutParams mismatchParams = new RelativeLayout.LayoutParams(
+
+    private void displayScore(int score) {
+        Dimension buttonDimension = displayWindow.scoreBoardDimension();
+
+        LayoutParams mismatchParams = new LayoutParams(
                 cast(buttonDimension.getWidth()), cast(buttonDimension.getHeight()));
 
-        mismatchParams.leftMargin = cast(displayWindow.topLeftCornerOfRightButton().getLeftMargin());
-        mismatchParams.topMargin = cast(displayWindow.topLeftCornerOfRightButton().getTopMargin());
+        TextView textView = new TextView(context);
 
-        layout.addView(matchButton.getMismatchButton(), mismatchParams);
+        textView.setText(score+"");
+        textView.setTextColor(context.getResources().getColor(R.color.matchMismatchButtonTextColor));
+
+        mismatchParams.leftMargin = cast(displayWindow.topLeftCornerOfScore().getLeftMargin());
+        mismatchParams.topMargin = cast(displayWindow.topLeftCornerOfScore().getTopMargin());
+
+        layout.addView(textView, mismatchParams);
     }
 
     private int generateViewId() {
@@ -92,7 +122,7 @@ public class CellGridDisplay {
 
     public void display(List<List<ImageViewWrapper>> imageViewGrid, Orientation orientation) {
 
-        Dimension cellDimension = orientation.getOneCellDimension();
+        Dimension cellDimension = orientation.getSingleCellDimension();
 
         for (int r = 0; r < imageViewGrid.size(); r++) {
 
@@ -115,13 +145,13 @@ public class CellGridDisplay {
         return ll;
     }
 
-    RelativeLayout.LayoutParams relativeLayoutParamFor(int row, Orientation orientation) {
-        Dimension cellDimension = orientation.getOneCellDimension();
+    LayoutParams relativeLayoutParamFor(int row, Orientation orientation) {
+        Dimension cellDimension = orientation.getSingleCellDimension();
         int width = cast(cellDimension.getWidth());
         int height = cast(cellDimension.getHeight());
 
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width * GRID_COL_CNT, height * GRID_ROW_CNT);
-        params.leftMargin = cast(orientation.firstRowMargin.getLeftMargin());
+        LayoutParams params = new LayoutParams(width * GRID_COL_CNT, height * GRID_ROW_CNT);
+        params.leftMargin = cast(orientation.getFirstRowMargin().getLeftMargin());
         params.topMargin = cast(orientation.getSubsequentRowMargin(row).getTopMargin());
 
         return params;

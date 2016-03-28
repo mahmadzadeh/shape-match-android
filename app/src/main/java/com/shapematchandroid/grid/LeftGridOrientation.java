@@ -7,6 +7,6 @@ public class LeftGridOrientation extends Orientation {
 
     public LeftGridOrientation(CellMargin firstColumnMargin, Dimension oneCellDimension) {
         this.firstRowMargin = firstColumnMargin;
-        this.oneCellDimension = oneCellDimension;
+        this.singleCellDimension = oneCellDimension;
     }
 }

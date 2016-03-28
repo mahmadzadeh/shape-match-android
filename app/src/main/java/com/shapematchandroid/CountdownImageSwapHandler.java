@@ -2,7 +2,8 @@ package com.shapematchandroid;
 
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+
+import com.shapematchandroid.ui.CountDownScreenActivity;
 
 import java.util.Arrays;
 import java.util.List;

@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="buttonBackGround">#7bdc4c</color>
     <color name="startScreenBackground">#000000</color>
+    <color name="matchMismatchButtonTextColor">#fafaf8</color>
     <color name="matchButtonBackground">#7bdc4c</color>
     <color name="mismatchButtonBackground">#fa0f06</color>
 </resources>

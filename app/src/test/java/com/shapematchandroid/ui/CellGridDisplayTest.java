@@ -1,11 +1,15 @@
-package com.shapematchandroid.grid;
+package com.shapematchandroid.ui;
 
 import android.content.Context;
 import android.widget.RelativeLayout;
 
-import com.shapematchandroid.GameButtons;
 import com.shapematchandroid.GameLevel;
 import com.shapematchandroid.ImageViewWrapper;
+import com.shapematchandroid.grid.Cell;
+import com.shapematchandroid.grid.CellGrid;
+import com.shapematchandroid.grid.CellGridPair;
+import com.shapematchandroid.grid.CellGridUtil;
+import com.shapematchandroid.grid.LeftGridOrientation;
 import com.shapematchandroid.util.CellMargin;
 import com.shapematchandroid.util.Dimension;
 import com.shapematchandroid.util.DisplayWindow;

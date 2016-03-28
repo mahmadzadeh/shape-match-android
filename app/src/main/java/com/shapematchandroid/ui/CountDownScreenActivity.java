@@ -1,9 +1,12 @@
-package com.shapematchandroid;
+package com.shapematchandroid.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+
+import com.shapematchandroid.CountdownImageSwapHandler;
+import com.shapematchandroid.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

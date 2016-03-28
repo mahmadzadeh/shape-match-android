@@ -1,7 +1,9 @@
-package com.shapematchandroid;
+package com.shapematchandroid.ui;
 
 import android.content.Context;
 import android.widget.Button;
+
+import com.shapematchandroid.R;
 
 public class GameButtons {
 
@@ -14,12 +16,15 @@ public class GameButtons {
     }
 
     public GameButtons(Context context){
+
         matchButton = new Button(context);
+        matchButton.setTextColor(context.getResources().getColor(R.color.matchMismatchButtonTextColor));
         matchButton.setText(R.string.match_button_string);
         matchButton.setBackground(context.getResources().getDrawable(R.drawable.roundbutton_green));
+
         mismatchButton  = new Button(context);
+        mismatchButton.setTextColor(context.getResources().getColor(R.color.matchMismatchButtonTextColor));
         mismatchButton.setText(R.string.mismatch_button_string);
-        mismatchButton.setBackgroundColor(context.getResources().getColor(R.color.mismatchButtonBackground));
         mismatchButton.setBackground(context.getResources().getDrawable(R.drawable.roundbutton_red));
     }
 

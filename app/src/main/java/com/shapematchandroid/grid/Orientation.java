@@ -7,10 +7,10 @@ import com.shapematchandroid.util.Dimension;
 public abstract class Orientation {
 
     protected CellMargin firstRowMargin;
-    protected Dimension oneCellDimension;
+    protected Dimension singleCellDimension;
 
-    public Dimension getOneCellDimension() {
-        return oneCellDimension;
+    public Dimension getSingleCellDimension() {
+        return singleCellDimension;
     }
 
     public CellMargin getFirstRowMargin() {
@@ -20,7 +20,7 @@ public abstract class Orientation {
     public CellMargin getSubsequentRowMargin(int row) {
         return new CellMargin(
                 this.firstRowMargin.getLeftMargin(),
-                this.firstRowMargin.getTopMargin() + ( row * oneCellDimension.getHeight()));
+                this.firstRowMargin.getTopMargin() + ( row * singleCellDimension.getHeight()));
     }
 
 }

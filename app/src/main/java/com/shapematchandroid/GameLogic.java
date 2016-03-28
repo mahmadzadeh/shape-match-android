@@ -77,6 +77,10 @@ public class GameLogic {
         return score;
     }
 
+    public int currentPoints() {
+        return score.points();
+    }
+
     public boolean isGameOver() {
         return  isGameOver;
     }

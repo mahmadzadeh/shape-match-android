@@ -1,6 +1,8 @@
 package com.shapematchandroid;
 
-
+/**
+ * Immutable
+ */
 public class Score {
 
     public static final Score initialScore = new Score(0);

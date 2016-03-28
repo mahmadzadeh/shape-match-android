@@ -7,6 +7,6 @@ public class RightGridOrientation extends Orientation {
 
     public RightGridOrientation(CellMargin firstRowMargin, Dimension oneCellDimension) {
         this.firstRowMargin = firstRowMargin;
-        this.oneCellDimension  = oneCellDimension;
+        this.singleCellDimension = oneCellDimension;
     }
 }
