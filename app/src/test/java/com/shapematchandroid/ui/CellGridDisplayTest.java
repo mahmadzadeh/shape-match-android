@@ -2,6 +2,7 @@ package com.shapematchandroid.ui;
 
 import android.content.Context;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.shapematchandroid.GameLevel;
 import com.shapematchandroid.ImageViewWrapper;
@@ -34,7 +35,7 @@ public class CellGridDisplayTest {
 
     CellGridDisplay gridDisplay = new CellGridDisplay(mock(CellGridPair.class),
             mock(GameButtons.class),
-            mock(RelativeLayout.class), mock(Context.class));
+            mock(RelativeLayout.class), mock(Context.class), mock(TextView.class));
 
     @Test
     public void givenCellGridThenImageViewTransformerTurnsCellsToImageViewGrid() {

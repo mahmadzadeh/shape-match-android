@@ -31,13 +31,18 @@ public class CellGridDisplay {
     private final RelativeLayout layout;
     private final Random random = new Random(System.currentTimeMillis());
     private final Context context;
+    private TextView countDownText;
     private final DisplayWindow displayWindow;
     private final GameButtons gameButtons;
 
-    public CellGridDisplay(CellGridPair cellGridPair, GameButtons gameButtons, RelativeLayout layout, Context context) {
+    public CellGridDisplay(CellGridPair cellGridPair,
+                           GameButtons gameButtons,
+                           RelativeLayout layout,
+                           Context context, TextView countDownText) {
         this.cellGridPair = cellGridPair;
         this.layout = layout;
         this.context = context;
+        this.countDownText = countDownText;
         this.displayWindow = new DisplayWindow(new Dimension(layout.getWidth(), layout.getHeight()));
         this.gameButtons = gameButtons;
     }
@@ -52,13 +57,28 @@ public class CellGridDisplay {
         LeftGridOrientation leftGridOrientation = new LeftGridOrientation(displayWindow.topLeftCornerOfLeftGrid(), displayWindow.oneCellDimension());
         RightGridOrientation rightGridOrientation = new RightGridOrientation(displayWindow.topLeftCornerOfRightGrid(), displayWindow.oneCellDimension());
 
-        display(transformToImageViewWrapperGrid(lgrid), leftGridOrientation);
-        display(transformToImageViewWrapperGrid(rgrid), rightGridOrientation);
-        display(gameButtons);
+        displayGrid(transformToImageViewWrapperGrid(lgrid), leftGridOrientation);
+        displayGrid(transformToImageViewWrapperGrid(rgrid), rightGridOrientation);
+        displayGameButtons();
         displayScore(points);
+        displayCountDownTimer();
+
     }
 
-    private void display(GameButtons gameButtons) {
+    private void displayCountDownTimer() {
+        Dimension buttonDimension = displayWindow.scoreBoardDimension().increaseByFactor(2,2);
+
+        LayoutParams timerParams = new LayoutParams(
+                cast(buttonDimension.getWidth()), cast(buttonDimension.getHeight()));
+
+        timerParams.leftMargin = cast(displayWindow.topLeftCornerOfCountDownTimer().getLeftMargin());
+        timerParams.topMargin = cast(displayWindow.topLeftCornerOfCountDownTimer().getTopMargin());
+
+        layout.addView(countDownText, timerParams);
+
+    }
+
+    private void displayGameButtons() {
 
         Dimension buttonDimension = displayWindow.singleButtonDimension();
 
@@ -90,8 +110,8 @@ public class CellGridDisplay {
 
         TextView textView = new TextView(context);
 
-        textView.setText(score+"");
-        textView.setTextColor(context.getResources().getColor(R.color.matchMismatchButtonTextColor));
+        textView.setText(score + "");
+        textView.setTextAppearance(context, R.style.scoreBoardFont);
 
         mismatchParams.leftMargin = cast(displayWindow.topLeftCornerOfScore().getLeftMargin());
         mismatchParams.topMargin = cast(displayWindow.topLeftCornerOfScore().getTopMargin());
@@ -120,7 +140,7 @@ public class CellGridDisplay {
         return grid;
     }
 
-    public void display(List<List<ImageViewWrapper>> imageViewGrid, Orientation orientation) {
+    public void displayGrid(List<List<ImageViewWrapper>> imageViewGrid, Orientation orientation) {
 
         Dimension cellDimension = orientation.getSingleCellDimension();
 
@@ -139,13 +159,12 @@ public class CellGridDisplay {
             int w = cast(oneCellDimension.getWidth());
             int h = cast(oneCellDimension.getHeight());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(w, h);
-            params.setMargins(0,0,0,0);
             ll.addView(imageView, params);
         }
         return ll;
     }
 
-    LayoutParams relativeLayoutParamFor(int row, Orientation orientation) {
+    RelativeLayout.LayoutParams relativeLayoutParamFor(int row, Orientation orientation) {
         Dimension cellDimension = orientation.getSingleCellDimension();
         int width = cast(cellDimension.getWidth());
         int height = cast(cellDimension.getHeight());

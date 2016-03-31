@@ -7,6 +7,9 @@ import static com.shapematchandroid.GameLevel.initialLevel;
 import static com.shapematchandroid.Score.initialScore;
 import static com.shapematchandroid.grid.CellGridUtil.getShapesForLevel;
 
+/**
+ * Immutable
+ * */
 public class GameLogic {
 
     public final static int REQUIRED_CORRECT_CONSECUTIVE_ANSWERES = 2;

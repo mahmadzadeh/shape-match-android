@@ -25,4 +25,7 @@ public class CellMargin {
     }
 
 
+    public CellMargin addToTop(double height) {
+        return new CellMargin(this.leftMargin, this.topMargin + height);
+    }
 }

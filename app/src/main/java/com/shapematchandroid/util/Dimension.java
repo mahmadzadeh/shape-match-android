@@ -23,6 +23,10 @@ public class Dimension {
         this.height = height;
     }
 
+    public Dimension increaseByFactor(double widthFactor, double heightFactor) {
+        return new Dimension(this.width*widthFactor, this.height*heightFactor);
+    }
+
     @Override
     public String toString() {
         return "Dimension{" +

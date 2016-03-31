@@ -10,8 +10,6 @@ public class DisplayWindow {
     public static final double LEFT_GRID_WIDTH_PERCENTAGE = 0.35;
     public static final double LEFT_GRID_HEIGHT_PERCENTAGE =0.15;
 
-
-
     public static final double RIGHT_GRID_WIDTH_PERCENTAGE = 0.61;
     public static final double RIGHT_GRID_HEIGHT_PERCENTAGE =0.15;
 
@@ -46,8 +44,18 @@ public class DisplayWindow {
         return new CellMargin(
                 ( LEFT_GUTTER_WIDTH_PERCENTAGE +
                         LEFT_GRID_WIDTH_PERCENTAGE +
-                        ( ( GAP_BETWEEN_GRIDS_PERCENTAGE / 2 ) - (SINGLE_DISPLAY_CELL_WIDTH_PERCENTAGE/2))) * screenDimension.getWidth(),
+                        ( ( GAP_BETWEEN_GRIDS_PERCENTAGE / 2 ) - (SINGLE_DISPLAY_CELL_WIDTH_PERCENTAGE / 2))) * screenDimension.getWidth(),
                 LEFT_GUTTER_HEIGHT_PERCENTAGE * screenDimension.getHeight());
+
+    }
+
+    public CellMargin topLeftCornerOfCountDownTimer() {
+        return  new CellMargin(
+                ( LEFT_GUTTER_WIDTH_PERCENTAGE +
+                        LEFT_GRID_WIDTH_PERCENTAGE +
+                        ( ( GAP_BETWEEN_GRIDS_PERCENTAGE / 2 ) - (SINGLE_DISPLAY_CELL_WIDTH_PERCENTAGE))) * screenDimension.getWidth(),
+                LEFT_GUTTER_HEIGHT_PERCENTAGE * screenDimension.getHeight())
+                .addToTop(oneCellDimension().getHeight());
 
     }
 
