@@ -38,7 +38,8 @@ public class CellGridDisplay {
     public CellGridDisplay(CellGridPair cellGridPair,
                            GameButtons gameButtons,
                            RelativeLayout layout,
-                           Context context, TextView countDownText) {
+                           Context context,
+                           TextView countDownText) {
         this.cellGridPair = cellGridPair;
         this.layout = layout;
         this.context = context;
