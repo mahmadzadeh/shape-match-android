@@ -1,6 +1,5 @@
 package com.shapematchandroid.ui;
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -15,6 +14,7 @@ import com.shapematchandroid.GameLogic;
 import com.shapematchandroid.R;
 import com.shapematchandroid.Score;
 import com.shapematchandroid.UserInput;
+import com.shapematchandroid.util.SoundPlayer;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,8 +33,7 @@ public class GameScreenActivity extends AppCompatActivity {
     private Handler handler;
     private GameLogic gameLogic;
     private GameCountDownTimer timer;
-    private MediaPlayer dingSound;
-    private MediaPlayer failSound;
+    private SoundPlayer soundPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +66,7 @@ public class GameScreenActivity extends AppCompatActivity {
             }
         };
 
-        dingSound = MediaPlayer.create(this, R.raw.ding);
-        failSound = MediaPlayer.create(this, R.raw.fail);
+        soundPlayer = new SoundPlayer(this);
 
         uiElements.matchButton().setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -87,15 +85,8 @@ public class GameScreenActivity extends AppCompatActivity {
     }
 
     private void handleMatch() {
-        UserInput userInput = UserInput.Match;
-
-        if(gameLogic.isCorrectAnswer(userInput)) {
-            dingSound.start();
-        } else {
-            failSound.start();
-        }
-
-        gameLogic = gameLogic.evaluateUserInput(userInput);
+        soundPlayer.soundFeedbackForUserInput(UserInput.Match, gameLogic);
+        gameLogic = gameLogic.evaluateUserInput(UserInput.Match);
 
         new CellGridDisplay(
                 gameLogic.cellGridPair(),
@@ -106,15 +97,8 @@ public class GameScreenActivity extends AppCompatActivity {
     }
 
     private void handleMismatch() {
-        UserInput userInput = UserInput.Mismatch;
-
-        if(gameLogic.isCorrectAnswer(userInput)) {
-            dingSound.start();
-        } else {
-            failSound.start();
-        }
-
-        gameLogic = gameLogic.evaluateUserInput(userInput);
+        soundPlayer.soundFeedbackForUserInput(UserInput.Mismatch, gameLogic);
+        gameLogic = gameLogic.evaluateUserInput(UserInput.Mismatch);
 
         new CellGridDisplay(
                 gameLogic.cellGridPair(),
