@@ -41,7 +41,7 @@ public class GameScreenActivity extends AppCompatActivity {
 
         rl = (RelativeLayout) findViewById(R.id.contentId);
 
-        uiElements = new UIElements(new GameButtons(this), new CountDownTextView(this));
+        uiElements = new UIElements(new GameButtons(this), new CountDownTextView(this), new ScoreTextView(this));
 
         gameLogic   = new GameLogic(
                 GameLevel.initialLevel,

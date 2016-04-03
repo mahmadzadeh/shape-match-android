@@ -5,10 +5,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
-import android.widget.TextView;
 
 import com.shapematchandroid.ImageViewWrapper;
-import com.shapematchandroid.R;
 import com.shapematchandroid.grid.Cell;
 import com.shapematchandroid.grid.CellGridPair;
 import com.shapematchandroid.grid.LeftGridOrientation;
@@ -31,9 +29,8 @@ public class CellGridDisplay {
     private final RelativeLayout layout;
     private final Random random = new Random(System.currentTimeMillis());
     private final Context context;
-    private TextView countDownText;
     private final DisplayWindow displayWindow;
-    private final GameButtons gameButtons;
+    private final UIElements uiElements;
 
     public CellGridDisplay(CellGridPair cellGridPair,
                            RelativeLayout layout,
@@ -42,9 +39,8 @@ public class CellGridDisplay {
         this.cellGridPair = cellGridPair;
         this.layout = layout;
         this.context = context;
-        this.countDownText = uiElements.countDownTextView();
         this.displayWindow = new DisplayWindow(new Dimension(layout.getWidth(), layout.getHeight()));
-        this.gameButtons = uiElements.gameButtons();
+        this.uiElements = uiElements;
     }
 
     public void displayOnScreen(int points) {
@@ -74,18 +70,18 @@ public class CellGridDisplay {
         timerParams.leftMargin = cast(displayWindow.topLeftCornerOfCountDownTimer().getLeftMargin());
         timerParams.topMargin = cast(displayWindow.topLeftCornerOfCountDownTimer().getTopMargin());
 
-        layout.addView(countDownText, timerParams);
+        layout.addView(uiElements.countDownTextView(), timerParams);
     }
 
     private void displayGameButtons() {
 
         Dimension buttonDimension = displayWindow.singleButtonDimension();
 
-        layout.addView(gameButtons.mismatchButton(), layoutParamsFor(buttonDimension,
+        layout.addView(uiElements.mismatchButton(), layoutParamsFor(buttonDimension,
                 displayWindow.topLeftCornerOfLeftButton().getLeftMargin(),
                 displayWindow.topLeftCornerOfLeftButton().getTopMargin()));
 
-        layout.addView(gameButtons.matchButton(), layoutParamsFor(buttonDimension,
+        layout.addView(uiElements.matchButton(), layoutParamsFor(buttonDimension,
                 displayWindow.topLeftCornerOfRightButton().getLeftMargin(),
                 displayWindow.topLeftCornerOfRightButton().getTopMargin()));
     }
@@ -107,15 +103,12 @@ public class CellGridDisplay {
         LayoutParams mismatchParams = new LayoutParams(
                 cast(buttonDimension.getWidth()), cast(buttonDimension.getHeight()));
 
-        TextView textView = new TextView(context);
-
-        textView.setText(score + "");
-        textView.setTextAppearance(context, R.style.scoreBoardFont);
+        uiElements.setScore(score);
 
         mismatchParams.leftMargin = cast(displayWindow.topLeftCornerOfScore().getLeftMargin());
         mismatchParams.topMargin = cast(displayWindow.topLeftCornerOfScore().getTopMargin());
 
-        layout.addView(textView, mismatchParams);
+        layout.addView(uiElements.scoreTextView(), mismatchParams);
     }
 
     private int generateViewId() {

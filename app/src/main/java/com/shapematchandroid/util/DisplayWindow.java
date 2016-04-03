@@ -40,18 +40,13 @@ public class DisplayWindow {
         return new CellMargin(
                 ( LEFT_GUTTER_WIDTH_PERCENTAGE +
                         LEFT_GRID_WIDTH_PERCENTAGE +
-                        ( ( GAP_BETWEEN_GRIDS_PERCENTAGE / 2 ) - (SINGLE_DISPLAY_CELL_WIDTH_PERCENTAGE / 2))) * screenDimension.getWidth(),
+                        ( ( GAP_BETWEEN_GRIDS_PERCENTAGE / 2 ) - (SINGLE_DISPLAY_CELL_WIDTH_PERCENTAGE))) * screenDimension.getWidth(),
                 LEFT_GUTTER_HEIGHT_PERCENTAGE * screenDimension.getHeight());
 
     }
 
     public CellMargin topLeftCornerOfCountDownTimer() {
-        return  new CellMargin(
-                ( LEFT_GUTTER_WIDTH_PERCENTAGE +
-                        LEFT_GRID_WIDTH_PERCENTAGE +
-                        ( ( GAP_BETWEEN_GRIDS_PERCENTAGE / 2 ) - (SINGLE_DISPLAY_CELL_WIDTH_PERCENTAGE))) * screenDimension.getWidth(),
-                LEFT_GUTTER_HEIGHT_PERCENTAGE * screenDimension.getHeight())
-                .addToTop(oneCellDimension().getHeight());
+        return  topLeftCornerOfScore() .addToTop(oneCellDimension().getHeight());
 
     }
 
