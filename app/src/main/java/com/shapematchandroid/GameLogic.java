@@ -29,13 +29,13 @@ public class GameLogic {
     }
 
     public GameLogic evaluateUserInput(UserInput userInput) {
-        return userInput == UserInput.Match
-                ? gameLogicBasedOnUserSelection(cellGridPair.leftGrid().equals(cellGridPair.rightGrid()))
-                : gameLogicBasedOnUserSelection(cellGridPair.leftGrid().isNotEqual(cellGridPair.rightGrid()));
+        boolean isCorrectAnswerGiven = isCorrectAnswer(userInput);
+
+        return gameLogicBasedOnUserSelection(isCorrectAnswerGiven);
     }
 
-    private GameLogic gameLogicBasedOnUserSelection( Boolean shapesEquality ) {
-        if (shapesEquality) {
+    private GameLogic gameLogicBasedOnUserSelection( Boolean isCorrectAnswer ) {
+        if (isCorrectAnswer) {
             GameLevel level = determineGameLevel();
             int corrAnswers = determineCorrectAnswerCount(level);
            return new GameLogic(
@@ -103,5 +103,11 @@ public class GameLogic {
                 0,
                 initialScore,
                 false);
+    }
+
+    public boolean isCorrectAnswer(UserInput userInput) {
+        return userInput == UserInput.Match
+                ? cellGridPair.leftGrid().equals(cellGridPair.rightGrid())
+                : cellGridPair.leftGrid().isNotEqual(cellGridPair.rightGrid());
     }
 }

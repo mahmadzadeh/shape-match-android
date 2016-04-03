@@ -1,5 +1,6 @@
 package com.shapematchandroid.ui;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -32,6 +33,8 @@ public class GameScreenActivity extends AppCompatActivity {
     private Handler handler;
     private GameLogic gameLogic;
     private GameCountDownTimer timer;
+    private MediaPlayer dingSound;
+    private MediaPlayer failSound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,9 @@ public class GameScreenActivity extends AppCompatActivity {
             }
         };
 
+        dingSound = MediaPlayer.create(this, R.raw.ding);
+        failSound = MediaPlayer.create(this, R.raw.fail);
+
         uiElements.matchButton().setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 handleMatch();
@@ -81,7 +87,15 @@ public class GameScreenActivity extends AppCompatActivity {
     }
 
     private void handleMatch() {
-        gameLogic = gameLogic.evaluateUserInput(UserInput.formValue("match"));
+        UserInput userInput = UserInput.Match;
+
+        if(gameLogic.isCorrectAnswer(userInput)) {
+            dingSound.start();
+        } else {
+            failSound.start();
+        }
+
+        gameLogic = gameLogic.evaluateUserInput(userInput);
 
         new CellGridDisplay(
                 gameLogic.cellGridPair(),
@@ -92,7 +106,16 @@ public class GameScreenActivity extends AppCompatActivity {
     }
 
     private void handleMismatch() {
-        gameLogic = gameLogic.evaluateUserInput(UserInput.formValue("mismatch"));
+        UserInput userInput = UserInput.Mismatch;
+
+        if(gameLogic.isCorrectAnswer(userInput)) {
+            dingSound.start();
+        } else {
+            failSound.start();
+        }
+
+        gameLogic = gameLogic.evaluateUserInput(userInput);
+
         new CellGridDisplay(
                 gameLogic.cellGridPair(),
                 rl,

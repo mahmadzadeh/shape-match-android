@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.shapematchandroid.GameLogic.REQUIRED_CORRECT_CONSECUTIVE_ANSWERES;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 
@@ -69,7 +70,7 @@ public class GameLogicTest {
     public void givenGameWhenUserMakesNConsecutiveCorrectAnswersThenLevelIncreased() {
 
         GameLogic gl = makeNConsecutiveCorrectGuess(REQUIRED_CORRECT_CONSECUTIVE_ANSWERES,
-                new GameLogic(levelOne, matchingDisplayShapesPair,0, new Score(0), false));
+                new GameLogic(levelOne, matchingDisplayShapesPair, 0, new Score(0), false));
 
         assertEquals(levelTwo, gl.currentLevel());
     }
@@ -116,7 +117,21 @@ public class GameLogicTest {
 
         assertEquals( 1 , newGame.currentLevel().getShapeCount());
         assertEquals( 1 , newGame.cellGridPair().leftGrid().getShapeSlotPairCount());
-        assertEquals( 1 , newGame.cellGridPair().rightGrid().getShapeSlotPairCount());
+        assertEquals(1, newGame.cellGridPair().rightGrid().getShapeSlotPairCount());
+    }
+
+    @Test
+    public void givenUserInputThatIsCorrectThenIsCorrectGuessReturnsTrue() {
+        GameLogic gameLogic  = new GameLogic(new GameLevel(10), matchingDisplayShapesPair, 12, new Score(2222), false);
+
+        assertTrue(gameLogic.isCorrectAnswer(UserInput.Match));
+    }
+
+    @Test
+    public void givenUserInputThatIsNotCorrectThenIsCorrectGuessReturnsFalse() {
+        GameLogic gameLogic  = new GameLogic(new GameLevel(10), matchingDisplayShapesPair, 12, new Score(2222), false);
+
+        assertFalse(gameLogic.isCorrectAnswer(UserInput.Mismatch));
     }
 
     private GameLogic makeNConsecutiveCorrectGuess(Integer n, GameLogic gameLogic) {
