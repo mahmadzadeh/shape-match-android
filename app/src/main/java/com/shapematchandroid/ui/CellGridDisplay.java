@@ -36,16 +36,15 @@ public class CellGridDisplay {
     private final GameButtons gameButtons;
 
     public CellGridDisplay(CellGridPair cellGridPair,
-                           GameButtons gameButtons,
                            RelativeLayout layout,
                            Context context,
-                           TextView countDownText) {
+                           UIElements uiElements) {
         this.cellGridPair = cellGridPair;
         this.layout = layout;
         this.context = context;
-        this.countDownText = countDownText;
+        this.countDownText = uiElements.countDownTextView();
         this.displayWindow = new DisplayWindow(new Dimension(layout.getWidth(), layout.getHeight()));
-        this.gameButtons = gameButtons;
+        this.gameButtons = uiElements.gameButtons();
     }
 
     public void displayOnScreen(int points) {
@@ -76,18 +75,17 @@ public class CellGridDisplay {
         timerParams.topMargin = cast(displayWindow.topLeftCornerOfCountDownTimer().getTopMargin());
 
         layout.addView(countDownText, timerParams);
-
     }
 
     private void displayGameButtons() {
 
         Dimension buttonDimension = displayWindow.singleButtonDimension();
 
-        layout.addView(gameButtons.getMismatchButton(), layoutParamsFor(buttonDimension,
+        layout.addView(gameButtons.mismatchButton(), layoutParamsFor(buttonDimension,
                 displayWindow.topLeftCornerOfLeftButton().getLeftMargin(),
                 displayWindow.topLeftCornerOfLeftButton().getTopMargin()));
 
-        layout.addView(gameButtons.getMatchButton(), layoutParamsFor(buttonDimension,
+        layout.addView(gameButtons.matchButton(), layoutParamsFor(buttonDimension,
                 displayWindow.topLeftCornerOfRightButton().getLeftMargin(),
                 displayWindow.topLeftCornerOfRightButton().getTopMargin()));
     }

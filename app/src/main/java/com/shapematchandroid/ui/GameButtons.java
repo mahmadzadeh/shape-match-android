@@ -28,11 +28,11 @@ public class GameButtons {
         mismatchButton.setBackground(context.getResources().getDrawable(R.drawable.roundbutton_red));
     }
 
-    public Button getMatchButton() {
+    public Button matchButton() {
         return matchButton;
     }
 
-    public Button getMismatchButton() {
+    public Button mismatchButton() {
         return mismatchButton;
     }
 

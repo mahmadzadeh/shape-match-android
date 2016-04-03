@@ -33,9 +33,10 @@ public class CellGridDisplayTest {
     @Mock
     RelativeLayout mockLayout;
 
-    CellGridDisplay gridDisplay = new CellGridDisplay(mock(CellGridPair.class),
-            mock(GameButtons.class),
-            mock(RelativeLayout.class), mock(Context.class), mock(TextView.class));
+    CellGridDisplay gridDisplay = new CellGridDisplay(
+            mock(CellGridPair.class),
+            mock(RelativeLayout.class),
+            mock(Context.class), mock(UIElements.class));
 
     @Test
     public void givenCellGridThenImageViewTransformerTurnsCellsToImageViewGrid() {

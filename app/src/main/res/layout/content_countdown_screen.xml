@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.CountDownScreenActivity"
-    android:background="@color/startScreenBackground">
+    android:background="@drawable/glossy_back">
 
     <ImageView
         android:layout_width="100dp"

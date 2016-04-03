@@ -30,10 +30,6 @@ public class DisplayWindow {
         this.screenDimension = screenDimension;
     }
 
-    public Dimension getScreenDimension() {
-        return screenDimension;
-    }
-
 
     public CellMargin topLeftCornerOfLeftGrid() {
         return new CellMargin(LEFT_GUTTER_WIDTH_PERCENTAGE * screenDimension.getWidth(), LEFT_GUTTER_HEIGHT_PERCENTAGE * screenDimension.getHeight());

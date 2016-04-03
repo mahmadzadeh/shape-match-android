@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.shapematchandroid.GameLevel;
 import com.shapematchandroid.GameLogic;
@@ -24,9 +23,11 @@ import static com.shapematchandroid.grid.CellGridUtil.getShapesForLevel;
 
 public class GameScreenActivity extends AppCompatActivity {
 
+    public final int ONE_ROUND_IN_MILLIS = 90000;
+    public final int COUNT_DOWN_INTERVAL_IN_MILLIS = 1000;
+
     private RelativeLayout rl;
-    private GameButtons gameButtons;
-    private TextView countDownText;
+    private UIElements uiElements;
 
     private Handler handler;
     private GameLogic gameLogic;
@@ -39,10 +40,8 @@ public class GameScreenActivity extends AppCompatActivity {
         setContentView(R.layout.game_screen);
 
         rl = (RelativeLayout) findViewById(R.id.contentId);
-        gameButtons = new GameButtons(this);
-        countDownText = new TextView(this);
-        countDownText.setText("");
-        countDownText.setTextAppearance(this, R.style.scoreBoardFont);
+
+        uiElements = new UIElements(new GameButtons(this), new CountDownTextView(this));
 
         gameLogic   = new GameLogic(
                 GameLevel.initialLevel,
@@ -55,22 +54,23 @@ public class GameScreenActivity extends AppCompatActivity {
             public void handleMessage(Message m) {
                 new CellGridDisplay(
                         gameLogic.cellGridPair(),
-                        gameButtons,
-                        rl, GameScreenActivity.this, countDownText)
+                        rl,
+                        GameScreenActivity.this,
+                        uiElements)
                         .displayOnScreen(gameLogic.currentPoints());
 
-                timer = new GameCountDownTimer(90000, 1000);
+                timer = new GameCountDownTimer(ONE_ROUND_IN_MILLIS, COUNT_DOWN_INTERVAL_IN_MILLIS);
                 timer.start();
             }
         };
 
-        gameButtons.getMatchButton().setOnClickListener(new OnClickListener() {
+        uiElements.matchButton().setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 handleMatch();
             }
         });
 
-        gameButtons.getMismatchButton().setOnClickListener(new OnClickListener() {
+        uiElements.mismatchButton().setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 handleMismatch();
             }
@@ -82,18 +82,22 @@ public class GameScreenActivity extends AppCompatActivity {
 
     private void handleMatch() {
         gameLogic = gameLogic.evaluateUserInput(UserInput.formValue("match"));
+
         new CellGridDisplay(
                 gameLogic.cellGridPair(),
-                gameButtons,
-                rl, this, countDownText).displayOnScreen(gameLogic.currentPoints());
+                rl,
+                this,
+                uiElements)
+                .displayOnScreen(gameLogic.currentPoints());
     }
 
     private void handleMismatch() {
         gameLogic = gameLogic.evaluateUserInput(UserInput.formValue("mismatch"));
         new CellGridDisplay(
                 gameLogic.cellGridPair(),
-                gameButtons,
-                rl, this, countDownText).displayOnScreen(gameLogic.currentPoints());
+                rl,
+                this,
+                uiElements).displayOnScreen(gameLogic.currentPoints());
     }
 
     private void updateUI() {
@@ -126,12 +130,12 @@ public class GameScreenActivity extends AppCompatActivity {
                     TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))
                     );
 
-            countDownText.setText(text);
+            uiElements.setCountDownText(text);
         }
 
         @Override
         public void onFinish() {
-
+            uiElements.setCountDownText("00:00");
         }
     }
 }
