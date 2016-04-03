@@ -27,6 +27,7 @@ public class GameScreenActivity extends AppCompatActivity {
     public final int ONE_ROUND_IN_MILLIS = 90000;
     public final int COUNT_DOWN_INTERVAL_IN_MILLIS = 1000;
 
+    private final int INITIAL_CORRECT_ANSWERS = 0;
     private RelativeLayout rl;
     private UIElements uiElements;
 
@@ -48,7 +49,7 @@ public class GameScreenActivity extends AppCompatActivity {
         gameLogic   = new GameLogic(
                 GameLevel.initialLevel,
                 getShapesForLevel(GameLevel.initialLevel),
-                0,
+                INITIAL_CORRECT_ANSWERS,
                 Score.initialScore,
                 false);
 
