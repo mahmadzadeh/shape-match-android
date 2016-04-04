@@ -10,24 +10,24 @@ import com.shapematchandroid.UserInput;
 
 public class SoundPlayer {
 
-    private final MediaPlayer buzzerMediaPlayer;
-    private final MediaPlayer dingMediaPlayer;
+    private final MediaPlayer buzzer;
+    private final MediaPlayer ding;
 
-    public SoundPlayer(MediaPlayer buzzerMediaPlayer, MediaPlayer dingMediaPlayer) {
-        this.buzzerMediaPlayer = buzzerMediaPlayer;
-        this.dingMediaPlayer = dingMediaPlayer;
+    public SoundPlayer(MediaPlayer buzzer, MediaPlayer ding) {
+        this.buzzer = buzzer;
+        this.ding = ding;
     }
 
     public SoundPlayer(Context context) {
-        this.buzzerMediaPlayer = MediaPlayer.create(context, R.raw.fail);
-        this.dingMediaPlayer = MediaPlayer.create(context, R.raw.ding);
+        this.buzzer = MediaPlayer.create(context, R.raw.fail);
+        this.ding = MediaPlayer.create(context, R.raw.ding);
     }
 
     public void soundFeedbackForUserInput(UserInput userInput, GameLogic gameLogic) {
         if(gameLogic.isCorrectAnswer(userInput)) {
-            dingMediaPlayer.start();
+            ding.start();
         } else {
-            buzzerMediaPlayer.start();
+            buzzer.start();
         }
     }
 }

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ShapeMatchAndroid</string>
     <string name="start_game">Start Game</string>
+    <string name="continue_game">Continue</string>
     <string name="action_settings">Title</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="match_button_string">Match</string>

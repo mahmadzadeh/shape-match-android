@@ -1,5 +1,6 @@
 package com.shapematchandroid.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -13,18 +14,19 @@ import com.shapematchandroid.GameLevel;
 import com.shapematchandroid.GameLogic;
 import com.shapematchandroid.R;
 import com.shapematchandroid.Score;
-import com.shapematchandroid.UserInput;
 import com.shapematchandroid.util.SoundPlayer;
 
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
+import static com.shapematchandroid.UserInput.Match;
+import static com.shapematchandroid.UserInput.Mismatch;
 import static com.shapematchandroid.grid.CellGridUtil.getShapesForLevel;
 
 public class GameScreenActivity extends AppCompatActivity {
 
-    public final int ONE_ROUND_IN_MILLIS = 90000;
+    public final int ONE_ROUND_IN_MILLIS = 5000;
     public final int COUNT_DOWN_INTERVAL_IN_MILLIS = 1000;
 
     private final int INITIAL_CORRECT_ANSWERS = 0;
@@ -86,8 +88,8 @@ public class GameScreenActivity extends AppCompatActivity {
     }
 
     private void handleMatch() {
-        soundPlayer.soundFeedbackForUserInput(UserInput.Match, gameLogic);
-        gameLogic = gameLogic.evaluateUserInput(UserInput.Match);
+        soundPlayer.soundFeedbackForUserInput(Match, gameLogic);
+        gameLogic = gameLogic.evaluateUserInput(Match);
 
         new CellGridDisplay(
                 gameLogic.cellGridPair(),
@@ -98,8 +100,8 @@ public class GameScreenActivity extends AppCompatActivity {
     }
 
     private void handleMismatch() {
-        soundPlayer.soundFeedbackForUserInput(UserInput.Mismatch, gameLogic);
-        gameLogic = gameLogic.evaluateUserInput(UserInput.Mismatch);
+        soundPlayer.soundFeedbackForUserInput(Mismatch, gameLogic);
+        gameLogic = gameLogic.evaluateUserInput(Mismatch);
 
         new CellGridDisplay(
                 gameLogic.cellGridPair(),
@@ -144,6 +146,9 @@ public class GameScreenActivity extends AppCompatActivity {
         @Override
         public void onFinish() {
             uiElements.setCountDownText("00:00");
+
+            Intent countDownIntent = new Intent(GameScreenActivity.this, ContinueScreenActivity.class);
+            startActivity(countDownIntent);
         }
     }
 }
