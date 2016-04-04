@@ -14,7 +14,11 @@ public class CountdownImageSwapHandler extends Handler {
     private CountDownScreenActivity activity;
 
     private List<Integer> imageResourceIds =
-            Arrays.asList(R.drawable.android3, R.drawable.android2, R.drawable.android1, R.drawable.go);
+            Arrays.asList(
+                    R.drawable.android3,
+                    R.drawable.android2,
+                    R.drawable.android1,
+                    R.drawable.go);
 
     private int countDownImageCount = imageResourceIds.size();
 
