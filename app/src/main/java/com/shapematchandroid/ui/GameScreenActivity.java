@@ -26,7 +26,7 @@ import static com.shapematchandroid.grid.CellGridUtil.getShapesForLevel;
 
 public class GameScreenActivity extends AppCompatActivity {
 
-    public final int ONE_ROUND_IN_MILLIS = 5000;
+    public final int ONE_ROUND_IN_MILLIS = 90000;
     public final int COUNT_DOWN_INTERVAL_IN_MILLIS = 1000;
 
     private final int INITIAL_CORRECT_ANSWERS = 0;
