@@ -31,7 +31,6 @@ public class ContinueScreenActivity extends AppCompatActivity {
                         startActivity(countDownIntent);
                     }
                 });
-
     }
 
     private String extractScoreFromIntentExtras() {
