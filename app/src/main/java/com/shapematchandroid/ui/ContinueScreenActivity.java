@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.shapematchandroid.R;
 
@@ -18,6 +19,10 @@ public class ContinueScreenActivity extends AppCompatActivity {
 
         final Button button = (Button) findViewById(R.id.button);
 
+        final TextView score = (TextView) findViewById(R.id.score);
+
+        score.setText("Score " + extractScoreFromIntentExtras());
+
         button.setOnClickListener(
                 new Button.OnClickListener() {
                     @Override
@@ -29,4 +34,14 @@ public class ContinueScreenActivity extends AppCompatActivity {
 
     }
 
+    private String extractScoreFromIntentExtras() {
+        Bundle extras = getIntent().getExtras();
+
+        String value="";
+
+        if (extras != null) {
+            value = extras.getInt(GameScreenActivity.FINAL_SCORE)+"";
+        }
+        return value;
+    }
 }

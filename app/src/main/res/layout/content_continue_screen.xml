@@ -13,8 +13,18 @@
     tools:showIn="@layout/activity_start_screen"
     android:background="@drawable/glossy_back">
 
+    <TextView
+        android:id="@+id/score"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="300dp"
+        android:layout_height="78dp"
+        android:textColor="@color/startButtonTextColor"
+        android:gravity="center" />
+
     <Button
         android:id="@+id/button"
+        android:layout_below="@+id/score"
         android:layout_width="300dp"
         android:layout_height="78dp"
         android:layout_centerHorizontal="true"

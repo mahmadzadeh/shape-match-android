@@ -26,7 +26,8 @@ import static com.shapematchandroid.grid.CellGridUtil.getShapesForLevel;
 
 public class GameScreenActivity extends AppCompatActivity {
 
-    public final int ONE_ROUND_IN_MILLIS = 90000;
+    public static final String FINAL_SCORE = "FINAL_SCORE";
+    public final int ONE_ROUND_IN_MILLIS = 5000;
     public final int COUNT_DOWN_INTERVAL_IN_MILLIS = 1000;
 
     private final int INITIAL_CORRECT_ANSWERS = 0;
@@ -148,6 +149,9 @@ public class GameScreenActivity extends AppCompatActivity {
             uiElements.setCountDownText("00:00");
 
             Intent countDownIntent = new Intent(GameScreenActivity.this, ContinueScreenActivity.class);
+
+            countDownIntent.putExtra(FINAL_SCORE, gameLogic.currentPoints());
+
             startActivity(countDownIntent);
         }
     }
