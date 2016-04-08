@@ -19,4 +19,13 @@ public class ScoreTest {
 
         assertEquals(0, score.deduct(10).points());
     }
+
+    @Test
+    public void givenInitialScoreItNeverChanges() {
+        Score score = Score.initialScore;
+
+        assertEquals(-10, score.deduct(10).points());
+
+        assertEquals(0 , score.points());
+    }
 }

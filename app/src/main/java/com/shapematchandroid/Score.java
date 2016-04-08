@@ -14,11 +14,11 @@ public class Score {
     }
 
     public Score add(int pts) {
-        return new Score(points += pts);
+        return new Score(points + pts);
     }
 
     public Score deduct(int pts) {
-        return new Score(points -= pts);
+        return new Score(points - pts);
     }
 
     public int points() {
