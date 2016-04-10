@@ -7,14 +7,29 @@ import android.widget.ImageView;
 
 import com.shapematchandroid.CountdownImageSwapHandler;
 import com.shapematchandroid.R;
+import com.shapematchandroid.util.CountDownTimerUtil;
 
-import java.util.Timer;
 import java.util.TimerTask;
 
 public class CountDownScreenActivity extends AppCompatActivity {
     ImageView countDownImage;
 
+    private final Long TIMER_INTERVAL = 100l;
+    private final Long TIMER_DELAY = 1000l;
+
     CountdownImageSwapHandler handler = new CountdownImageSwapHandler(this);
+
+    TimerTask timerTask = new TimerTask() {
+        public void run() {
+            if (handler.hasMoreImagesToSwap()) {
+                handler.obtainMessage(1).sendToTarget();
+            } else {
+                Intent countDownIntent = new Intent(CountDownScreenActivity.this, GameScreenActivity.class);
+                startActivity(countDownIntent);
+            }
+        }
+    };
+    CountDownTimerUtil countDownTimer = new CountDownTimerUtil(timerTask, TIMER_INTERVAL, TIMER_DELAY);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,29 +39,22 @@ public class CountDownScreenActivity extends AppCompatActivity {
 
         countDownImage = (ImageView) findViewById(R.id.imageView);
 
-        startCountdownTimer();
-    }
-
-    public void startCountdownTimer() {
-        long TIMER_INTERVAL = 100;
-        long TIMER_DELAY = 1000;
-        final Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                if (handler.hasMoreImagesToSwap()) {
-                    handler.obtainMessage(1).sendToTarget();
-                } else {
-                    timer.cancel();
-                    timer.purge();
-                    Intent countDownIntent = new Intent(CountDownScreenActivity.this, GameScreenActivity.class);
-                    startActivity(countDownIntent);
-                }
-            }
-        }, TIMER_INTERVAL, TIMER_DELAY);
+        countDownTimer.start();
     }
 
     public void swapImage(int resourceId) {
         countDownImage.setImageResource(resourceId);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        countDownTimer.pause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        countDownTimer.pause();
+    }
 }
