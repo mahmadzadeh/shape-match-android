@@ -62,10 +62,10 @@ public class CellGridDisplay {
     }
 
     private void displayCountDownTimer() {
-        Dimension buttonDimension = displayWindow.scoreBoardDimension().increaseByFactor(2,2);
+        Dimension countdownTimerDimension = displayWindow.scoreBoardDimension().increaseByFactor(2,2);
 
         LayoutParams timerParams = new LayoutParams(
-                cast(buttonDimension.getWidth()), cast(buttonDimension.getHeight()));
+                cast(countdownTimerDimension.getWidth()), cast(countdownTimerDimension.getHeight()));
 
         timerParams.leftMargin = cast(displayWindow.topLeftCornerOfCountDownTimer().getLeftMargin());
         timerParams.topMargin = cast(displayWindow.topLeftCornerOfCountDownTimer().getTopMargin());
@@ -84,6 +84,16 @@ public class CellGridDisplay {
         layout.addView(uiElements.matchButton(), layoutParamsFor(buttonDimension,
                 displayWindow.topLeftCornerOfRightButton().getLeftMargin(),
                 displayWindow.topLeftCornerOfRightButton().getTopMargin()));
+
+        Dimension quitButtonDimension = displayWindow.scoreBoardDimension().increaseByFactor(2,2);
+
+        LayoutParams quitButtonParams = new LayoutParams(
+                cast(quitButtonDimension.getWidth()), cast(quitButtonDimension.getHeight()));
+
+        quitButtonParams.leftMargin = cast(displayWindow.topLeftCornerOfQuitButton().getLeftMargin());
+        quitButtonParams.topMargin = cast(displayWindow.topLeftCornerOfQuitButton().getTopMargin());
+
+        layout.addView(uiElements.quitButton(), quitButtonParams);
     }
 
     private LayoutParams layoutParamsFor(Dimension buttonDimension, double leftMargin, double topMargin) {
@@ -98,17 +108,17 @@ public class CellGridDisplay {
 
 
     private void displayScore(int score) {
-        Dimension buttonDimension = displayWindow.scoreBoardDimension();
+        Dimension scoreDimension = displayWindow.scoreBoardDimension();
 
-        LayoutParams mismatchParams = new LayoutParams(
-                cast(buttonDimension.getWidth()), cast(buttonDimension.getHeight()));
+        LayoutParams scoreBoardParams = new LayoutParams(
+                cast(scoreDimension.getWidth()), cast(scoreDimension.getHeight()));
 
         uiElements.setScore(score);
 
-        mismatchParams.leftMargin = cast(displayWindow.topLeftCornerOfScore().getLeftMargin());
-        mismatchParams.topMargin = cast(displayWindow.topLeftCornerOfScore().getTopMargin());
+        scoreBoardParams.leftMargin = cast(displayWindow.topLeftCornerOfScore().getLeftMargin());
+        scoreBoardParams.topMargin = cast(displayWindow.topLeftCornerOfScore().getTopMargin());
 
-        layout.addView(uiElements.scoreTextView(), mismatchParams);
+        layout.addView(uiElements.scoreTextView(), scoreBoardParams);
     }
 
     private int generateViewId() {

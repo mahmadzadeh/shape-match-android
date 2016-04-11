@@ -10,7 +10,9 @@ public class UIElements {
     private final CountDownTextView countDownText;
     private final ScoreTextView scoreTextView;
 
-    public UIElements(GameButtons gameButtons, CountDownTextView countDownText, ScoreTextView scoreTextView ) {
+    public UIElements(GameButtons gameButtons,
+                      CountDownTextView countDownText,
+                      ScoreTextView scoreTextView ) {
         this.gameButtons = gameButtons;
         this.countDownText = countDownText;
         this.scoreTextView = scoreTextView;
@@ -25,6 +27,9 @@ public class UIElements {
     }
     public Button mismatchButton() {
         return gameButtons.mismatchButton();
+    }
+    public Button quitButton() {
+        return gameButtons.quitButton();
     }
 
     public CountDownTextView countDownText() {
@@ -55,4 +60,7 @@ public class UIElements {
         mismatchButton().setOnClickListener(clickListener);
     }
 
+    public void setQuitButtonClickListener(OnClickListener clickListener) {
+        quitButton().setOnClickListener(clickListener);
+    }
 }

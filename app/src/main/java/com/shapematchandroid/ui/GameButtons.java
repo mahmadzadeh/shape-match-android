@@ -7,33 +7,44 @@ import com.shapematchandroid.R;
 
 public class GameButtons {
 
-    private  final Button matchButton;
-    private  final Button mismatchButton;
+    private  final Button match;
+    private  final Button mismatch;
+    private  final Button quit;
 
-    public GameButtons(Button matchButton, Button mismatchButton) {
-        this.matchButton = matchButton;
-        this.mismatchButton = mismatchButton;
+    public GameButtons(Button matchButton, Button mismatchButton, Button quit) {
+        this.match = matchButton;
+        this.mismatch = mismatchButton;
+        this.quit = quit;
     }
 
     public GameButtons(Context context){
 
-        matchButton = new Button(context);
-        matchButton.setTextColor(context.getResources().getColor(R.color.matchMismatchButtonTextColor));
-        matchButton.setText(R.string.match_button_string);
-        matchButton.setBackground(context.getResources().getDrawable(R.drawable.roundbutton_green));
+        match = new Button(context);
+        match.setTextColor(context.getResources().getColor(R.color.matchMismatchButtonTextColor));
+        match.setText(R.string.match_button_string);
+        match.setBackground(context.getResources().getDrawable(R.drawable.roundbutton_green));
 
-        mismatchButton  = new Button(context);
-        mismatchButton.setTextColor(context.getResources().getColor(R.color.matchMismatchButtonTextColor));
-        mismatchButton.setText(R.string.mismatch_button_string);
-        mismatchButton.setBackground(context.getResources().getDrawable(R.drawable.roundbutton_red));
+        mismatch = new Button(context);
+        mismatch.setTextColor(context.getResources().getColor(R.color.matchMismatchButtonTextColor));
+        mismatch.setText(R.string.mismatch_button_string);
+        mismatch.setBackground(context.getResources().getDrawable(R.drawable.roundbutton_red));
+
+        quit = new Button(context);
+        quit.setTextColor(context.getResources().getColor(R.color.quitButtonTextColor));
+        quit.setText(R.string.quit_button_string);
+        quit.setBackground(context.getResources().getDrawable(R.drawable.roundbutton_red));
     }
 
     public Button matchButton() {
-        return matchButton;
+        return match;
     }
 
     public Button mismatchButton() {
-        return mismatchButton;
+        return mismatch;
+    }
+
+    public Button quitButton() {
+        return quit;
     }
 
 

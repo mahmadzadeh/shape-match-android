@@ -1,5 +1,6 @@
 package com.shapematchandroid.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -64,6 +65,17 @@ public class GameScreenActivity extends AppCompatActivity {
         uiElements.setMismatchButtonClickListener(new OnClickListener() {
             public void onClick(View v) {
                 handleUserInput(Mismatch);
+            }
+        });
+
+        uiElements.setQuitButtonClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent countDownIntent = new Intent(GameScreenActivity.this, ContinueScreenActivity.class);
+
+                countDownIntent.putExtra(GameScreenActivity.FINAL_SCORE, GameScreenActivity.this.currentPoints());
+
+                GameScreenActivity.this.startActivity(countDownIntent);
             }
         });
 

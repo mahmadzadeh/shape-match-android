@@ -6,4 +6,5 @@
     <string name="title_activity_game">GameActivity</string>
     <string name="match_button_string">Match</string>
     <string name="mismatch_button_string">Mismatch</string>
+    <string name="quit_button_string">Quit</string>
 </resources>

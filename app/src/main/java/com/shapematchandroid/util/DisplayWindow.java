@@ -47,7 +47,10 @@ public class DisplayWindow {
 
     public CellMargin topLeftCornerOfCountDownTimer() {
         return  topLeftCornerOfScore() .addToTop(oneCellDimension().getHeight());
+    }
 
+    public CellMargin topLeftCornerOfQuitButton() {
+        return  topLeftCornerOfCountDownTimer().addToTop(oneCellDimension().getHeight() * 3);
     }
 
     public CellMargin topLeftCornerOfRightGrid() {
