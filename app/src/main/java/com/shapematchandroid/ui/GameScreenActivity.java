@@ -12,6 +12,7 @@ import com.shapematchandroid.GameLevel;
 import com.shapematchandroid.GameLogic;
 import com.shapematchandroid.R;
 import com.shapematchandroid.Score;
+import com.shapematchandroid.UserInput;
 import com.shapematchandroid.util.SoundPlayer;
 
 import java.util.Timer;
@@ -66,15 +67,15 @@ public class GameScreenActivity extends AppCompatActivity {
 
         soundPlayer = new SoundPlayer(this);
 
-        uiElements.matchButton().setOnClickListener(new OnClickListener() {
+        uiElements.setMatchButtonClickListener(new OnClickListener() {
             public void onClick(View v) {
-                handleMatch();
+                handleUserInput(Match);
             }
         });
 
-        uiElements.mismatchButton().setOnClickListener(new OnClickListener() {
+        uiElements.setMismatchButtonClickListener(new OnClickListener() {
             public void onClick(View v) {
-                handleMismatch();
+                handleUserInput(Mismatch);
             }
         });
 
@@ -102,16 +103,9 @@ public class GameScreenActivity extends AppCompatActivity {
         timer.cancel();
     }
 
-    private void handleMatch() {
-        soundPlayer.soundFeedbackForUserInput(Match, gameLogic);
-        gameLogic = gameLogic.evaluateUserInput(Match);
-
-        refreshScreen();
-    }
-
-    private void handleMismatch() {
-        soundPlayer.soundFeedbackForUserInput(Mismatch, gameLogic);
-        gameLogic = gameLogic.evaluateUserInput(Mismatch);
+    private void handleUserInput(UserInput userInput) {
+        soundPlayer.soundFeedbackForUserInput(gameLogic.isCorrectAnswer(userInput));
+        gameLogic = gameLogic.evaluateUserInput(userInput);
 
         refreshScreen();
     }

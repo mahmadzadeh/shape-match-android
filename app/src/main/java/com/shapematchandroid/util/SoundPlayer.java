@@ -4,9 +4,7 @@ package com.shapematchandroid.util;
 import android.content.Context;
 import android.media.MediaPlayer;
 
-import com.shapematchandroid.GameLogic;
 import com.shapematchandroid.R;
-import com.shapematchandroid.UserInput;
 
 public class SoundPlayer {
 
@@ -23,8 +21,8 @@ public class SoundPlayer {
         this.ding = MediaPlayer.create(context, R.raw.ding);
     }
 
-    public void soundFeedbackForUserInput(UserInput userInput, GameLogic gameLogic) {
-        if(gameLogic.isCorrectAnswer(userInput)) {
+    public void soundFeedbackForUserInput(boolean givenCorrectAnswer) {
+        if(givenCorrectAnswer) {
             ding.start();
         } else {
             buzzer.start();

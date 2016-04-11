@@ -1,5 +1,6 @@
 package com.shapematchandroid.ui;
 
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -45,4 +46,13 @@ public class UIElements {
     public void setScore(int score) {
         scoreTextView.setScore(score);
     }
+
+    public void setMatchButtonClickListener(OnClickListener clickListener) {
+        matchButton().setOnClickListener(clickListener);
+    }
+
+    public void setMismatchButtonClickListener(OnClickListener clickListener) {
+        mismatchButton().setOnClickListener(clickListener);
+    }
+
 }
