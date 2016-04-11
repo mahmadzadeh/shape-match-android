@@ -3,7 +3,7 @@ package com.shapematchandroid.util;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class CountDownTimerUtil {
+public class TimerUtil {
 
     private final long timerInterval;
     private final long timerDelay;
@@ -11,7 +11,7 @@ public class CountDownTimerUtil {
     protected Timer timer = new Timer();
     protected TimerTask task;
 
-    public CountDownTimerUtil(TimerTask task, long timerInterval1, long timerDelay1) {
+    public TimerUtil(TimerTask task, long timerInterval1, long timerDelay1) {
         this.timerInterval = timerInterval1;
         this.timerDelay = timerDelay1;
         this.task  = task;

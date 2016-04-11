@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import com.shapematchandroid.CountdownImageSwapHandler;
 import com.shapematchandroid.R;
-import com.shapematchandroid.util.CountDownTimerUtil;
+import com.shapematchandroid.util.TimerUtil;
 
 import java.util.TimerTask;
 
@@ -29,7 +29,7 @@ public class CountDownScreenActivity extends AppCompatActivity {
             }
         }
     };
-    CountDownTimerUtil countDownTimer = new CountDownTimerUtil(timerTask, TIMER_INTERVAL, TIMER_DELAY);
+    TimerUtil countDownTimer = new TimerUtil(timerTask, TIMER_INTERVAL, TIMER_DELAY);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

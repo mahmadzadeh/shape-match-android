@@ -49,8 +49,8 @@ public class GameScreenActivity extends AppCompatActivity {
         timer = new GameCountDownTimer(this, ONE_ROUND_IN_MILLIS, COUNT_DOWN_INTERVAL_IN_MILLIS);
 
         handler = new Handler() {
-
             public void handleMessage(Message m) {
+
                 gameLogic   = new GameLogic(
                         GameLevel.initialLevel,
                         getShapesForLevel(GameLevel.initialLevel),
@@ -127,5 +127,18 @@ public class GameScreenActivity extends AppCompatActivity {
     public void setCountDownText(String text) {
         uiElements.setCountDownText(text);
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        timer.cancel();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        timer.cancel();
+    }
+
 
 }
