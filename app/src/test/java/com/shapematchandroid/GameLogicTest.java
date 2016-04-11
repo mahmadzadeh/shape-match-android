@@ -11,7 +11,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.shapematchandroid.GameLogic.REQUIRED_CORRECT_CONSECUTIVE_ANSWERES;
+import static com.shapematchandroid.GameLogic.REQUIRED_CORRECT_CONSECUTIVE_ANSWERS;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
@@ -69,7 +69,7 @@ public class GameLogicTest {
     @Test
     public void givenGameWhenUserMakesNConsecutiveCorrectAnswersThenLevelIncreased() {
 
-        GameLogic gl = makeNConsecutiveCorrectGuess(REQUIRED_CORRECT_CONSECUTIVE_ANSWERES,
+        GameLogic gl = makeNConsecutiveCorrectGuess(REQUIRED_CORRECT_CONSECUTIVE_ANSWERS,
                 new GameLogic(levelOne, matchingDisplayShapesPair, 0, new Score(0), false));
 
         assertEquals(levelTwo, gl.currentLevel());
@@ -79,7 +79,7 @@ public class GameLogicTest {
 
     public void giveGameWhenUserMakesFourConsecutiveCorrectGuessesThenLevelIsIncreasedToThree() {
 
-        GameLogic gl = makeNConsecutiveCorrectGuess(REQUIRED_CORRECT_CONSECUTIVE_ANSWERES * 2,
+        GameLogic gl = makeNConsecutiveCorrectGuess(REQUIRED_CORRECT_CONSECUTIVE_ANSWERS * 2,
                 new GameLogic(levelOne, matchingDisplayShapesPair, 0, new Score(0), false));
 
         assertEquals(levelThree, gl.currentLevel());
@@ -98,7 +98,7 @@ public class GameLogicTest {
     public void givenGameWhnUserSelectsCorrectlyThenNextLevelHasShapeCountCorrespondingToTheLevel() {
         UserInput userInput = UserInput.Match;
 
-        GameLogic gl = makeNConsecutiveCorrectGuess(REQUIRED_CORRECT_CONSECUTIVE_ANSWERES,
+        GameLogic gl = makeNConsecutiveCorrectGuess(REQUIRED_CORRECT_CONSECUTIVE_ANSWERS,
                 new GameLogic(levelOne, matchingDisplayShapesPair, 0, new Score(0), false));
 
         assertEquals(gl.cellGridPair().leftGrid().getShapeSlotPairCount(), levelTwo.getShapeCount());

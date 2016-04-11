@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 
-import com.shapematchandroid.GameLevel;
 import com.shapematchandroid.GameLogic;
 import com.shapematchandroid.R;
-import com.shapematchandroid.Score;
 import com.shapematchandroid.UserInput;
 import com.shapematchandroid.util.SoundPlayer;
 
@@ -20,7 +18,6 @@ import java.util.TimerTask;
 
 import static com.shapematchandroid.UserInput.Match;
 import static com.shapematchandroid.UserInput.Mismatch;
-import static com.shapematchandroid.grid.CellGridUtil.getShapesForLevel;
 
 public class GameScreenActivity extends AppCompatActivity {
 
@@ -28,7 +25,6 @@ public class GameScreenActivity extends AppCompatActivity {
     public final int ONE_ROUND_IN_MILLIS = 90000;
     public final int COUNT_DOWN_INTERVAL_IN_MILLIS = 1000;
 
-    private final int INITIAL_CORRECT_ANSWERS = 0;
     private RelativeLayout rl;
     private UIElements uiElements;
 
@@ -51,16 +47,8 @@ public class GameScreenActivity extends AppCompatActivity {
 
         handler = new Handler() {
             public void handleMessage(Message m) {
-
-                gameLogic   = new GameLogic(
-                        GameLevel.initialLevel,
-                        getShapesForLevel(GameLevel.initialLevel),
-                        INITIAL_CORRECT_ANSWERS,
-                        Score.initialScore,
-                        false);
-
+                gameLogic   = GameLogic.initialState;
                 refreshScreen();
-
                 timer.start();
             }
         };
@@ -79,7 +67,7 @@ public class GameScreenActivity extends AppCompatActivity {
             }
         });
 
-        updateUI();
+        updateUI(); // update UI from a different thread
 
     }
 

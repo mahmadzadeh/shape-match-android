@@ -12,7 +12,14 @@ import static com.shapematchandroid.grid.CellGridUtil.getShapesForLevel;
  * */
 public class GameLogic {
 
-    public final static int REQUIRED_CORRECT_CONSECUTIVE_ANSWERES = 2;
+    private final static int INITIAL_CORRECT_ANSWERS = 0;
+
+    public final static int REQUIRED_CORRECT_CONSECUTIVE_ANSWERS = 2;
+    public static GameLogic initialState = new GameLogic(
+            GameLevel.initialLevel,
+            getShapesForLevel(GameLevel.initialLevel),
+            INITIAL_CORRECT_ANSWERS,Score.initialScore,
+            false);
 
     private final GameLevel currentLevel;
     private final CellGridPair cellGridPair;
@@ -59,7 +66,7 @@ public class GameLogic {
     }
 
     private GameLevel determineGameLevel() {
-        return correctAnswers == (REQUIRED_CORRECT_CONSECUTIVE_ANSWERES - 1)
+        return correctAnswers == (REQUIRED_CORRECT_CONSECUTIVE_ANSWERS - 1)
                 ? currentLevel.nextLevel()
                 :currentLevel;
     }
