@@ -58,12 +58,7 @@ public class GameScreenActivity extends AppCompatActivity {
                         Score.initialScore,
                         false);
 
-                new CellGridDisplay(
-                        gameLogic.cellGridPair(),
-                        rl,
-                        GameScreenActivity.this,
-                        uiElements)
-                        .displayOnScreen(gameLogic.currentPoints());
+                refreshScreen();
 
                 timer.start();
             }
@@ -87,39 +82,6 @@ public class GameScreenActivity extends AppCompatActivity {
 
     }
 
-    private void handleMatch() {
-        soundPlayer.soundFeedbackForUserInput(Match, gameLogic);
-        gameLogic = gameLogic.evaluateUserInput(Match);
-
-        new CellGridDisplay(
-                gameLogic.cellGridPair(),
-                rl,
-                this,
-                uiElements)
-                .displayOnScreen(gameLogic.currentPoints());
-    }
-
-    private void handleMismatch() {
-        soundPlayer.soundFeedbackForUserInput(Mismatch, gameLogic);
-        gameLogic = gameLogic.evaluateUserInput(Mismatch);
-
-        new CellGridDisplay(
-                gameLogic.cellGridPair(),
-                rl,
-                this,
-                uiElements).displayOnScreen(gameLogic.currentPoints());
-    }
-
-    private void updateUI() {
-        long TIMER_DELAY = 100;
-        final Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            public void run() {
-                handler.obtainMessage(1).sendToTarget();
-            }
-        }, TIMER_DELAY);
-    }
-
     public int currentPoints() {
         return  gameLogic.currentPoints();
     }
@@ -140,5 +102,36 @@ public class GameScreenActivity extends AppCompatActivity {
         timer.cancel();
     }
 
+    private void handleMatch() {
+        soundPlayer.soundFeedbackForUserInput(Match, gameLogic);
+        gameLogic = gameLogic.evaluateUserInput(Match);
 
+        refreshScreen();
+    }
+
+    private void handleMismatch() {
+        soundPlayer.soundFeedbackForUserInput(Mismatch, gameLogic);
+        gameLogic = gameLogic.evaluateUserInput(Mismatch);
+
+        refreshScreen();
+    }
+
+    private void refreshScreen() {
+        new CellGridDisplay(
+                gameLogic.cellGridPair(),
+                rl,
+                GameScreenActivity.this,
+                uiElements)
+                .displayOnScreen(gameLogic.currentPoints());
+    }
+
+    private void updateUI() {
+        long TIMER_DELAY = 100;
+        final Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            public void run() {
+                handler.obtainMessage(1).sendToTarget();
+            }
+        }, TIMER_DELAY);
+    }
 }
