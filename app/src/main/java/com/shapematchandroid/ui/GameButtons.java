@@ -32,7 +32,7 @@ public class GameButtons {
         quit = new Button(context);
         quit.setTextColor(context.getResources().getColor(R.color.quitButtonTextColor));
         quit.setText(R.string.quit_button_string);
-        quit.setBackground(context.getResources().getDrawable(R.drawable.roundbutton_red));
+        quit.setBackground(context.getResources().getDrawable(R.drawable.roundbutton_yellow));
     }
 
     public Button matchButton() {
