@@ -23,6 +23,7 @@ public class DisplayWindow {
     public static final double BUTTON_HEIGHT_PERCENTAGE = 0.20;
 
     public static final double GAP_BETWEEN_GRIDS_PERCENTAGE = 0.22;
+    public static final double FUDGE_FACTOR = 0.006;
 
     private final Dimension screenDimension;
 
@@ -40,7 +41,7 @@ public class DisplayWindow {
         return new CellMargin(
                 ( LEFT_GUTTER_WIDTH_PERCENTAGE +
                         LEFT_GRID_WIDTH_PERCENTAGE +
-                        ( ( GAP_BETWEEN_GRIDS_PERCENTAGE / 2 ) - (SINGLE_DISPLAY_CELL_WIDTH_PERCENTAGE))) * screenDimension.getWidth(),
+                        ( ( GAP_BETWEEN_GRIDS_PERCENTAGE / 2 ) - (SINGLE_DISPLAY_CELL_WIDTH_PERCENTAGE + FUDGE_FACTOR))) * screenDimension.getWidth(),
                 LEFT_GUTTER_HEIGHT_PERCENTAGE * screenDimension.getHeight());
 
     }
