@@ -17,13 +17,15 @@ public class ContinueScreenActivity extends AppCompatActivity {
 
         setContentView(R.layout.continue_screen);
 
-        final Button button = (Button) findViewById(R.id.button);
+        final Button continueButton = (Button) findViewById(R.id.continueButton);
+        final Button quitButton = (Button) findViewById(R.id.quit);
+        final Button saveButton = (Button) findViewById(R.id.save);
 
         final TextView score = (TextView) findViewById(R.id.score);
 
         score.setText("Score " + extractScoreFromIntentExtras());
 
-        button.setOnClickListener(
+        continueButton.setOnClickListener(
                 new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -31,6 +33,26 @@ public class ContinueScreenActivity extends AppCompatActivity {
                         startActivity(countDownIntent);
                     }
                 });
+
+        quitButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ContinueScreenActivity.this.finish();
+                    }
+                }
+        );
+
+        saveButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ContinueScreenActivity.this.finish();
+                    }
+                }
+        );
+
+
     }
 
     private String extractScoreFromIntentExtras() {

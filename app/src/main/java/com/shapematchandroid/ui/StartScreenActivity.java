@@ -16,7 +16,7 @@ public class StartScreenActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_start_screen);
 
-        final Button button = (Button) findViewById(R.id.button);
+        final Button button = (Button) findViewById(R.id.continueButton);
 
         button.setOnClickListener(
                 new Button.OnClickListener() {

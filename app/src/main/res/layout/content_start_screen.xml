@@ -14,7 +14,7 @@
     android:background="@drawable/glossy_back">
 
     <Button
-        android:id="@+id/button"
+        android:id="@id/continueButton"
         android:layout_width="300dp"
         android:layout_height="78dp"
         android:layout_centerHorizontal="true"
