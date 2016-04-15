@@ -23,17 +23,31 @@
         android:gravity="center" />
 
     <Button
-        android:id="@+id/continueButton"
+        android:id="@+id/save"
         android:layout_below="@+id/score"
         android:layout_width="150dp"
         android:layout_height="78dp"
         android:layout_centerHorizontal="false"
         android:layout_centerVertical="true"
         android:background="@drawable/roundbutton_green"
-        android:text="@string/continue_game"
+        android:text="@string/save_game"
         android:textColor="@color/continueButtonTextColor"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="52dp"/>
+
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_toRightOf="@+id/save"
+        android:layout_below="@+id/score"
+        android:layout_width="150dp"
+        android:layout_height="78dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/roundbutton_green"
+        android:text="@string/continue_game"
+        android:textColor="@color/continueButtonTextColor"
+        android:layout_marginRight="5dp"
+        />
 
     <Button
         android:id="@+id/quit"
@@ -47,18 +61,5 @@
         android:text="@string/quit_game"
         android:textColor="@color/continueButtonTextColor"
         android:layout_marginRight="5dp"/>
-
-    <Button
-        android:id="@+id/save"
-        android:layout_toRightOf="@+id/quit"
-        android:layout_below="@+id/score"
-        android:layout_width="150dp"
-        android:layout_height="78dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/roundbutton_green"
-        android:text="@string/save_game"
-        android:textColor="@color/continueButtonTextColor"/>
-
 
 </RelativeLayout>

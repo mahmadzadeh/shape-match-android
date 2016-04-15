@@ -3,7 +3,7 @@
     <string name="start_game">Start Game</string>
     <string name="continue_game">Continue</string>
     <string name="quit_game">Quit</string>
-    <string name="save_game">Save</string>
+    <string name="save_game">Save Score</string>
     <string name="action_settings">Title</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="match_button_string">Match</string>

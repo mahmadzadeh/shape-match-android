@@ -20,7 +20,6 @@ public class ContinueScreenActivity extends AppCompatActivity {
         final Button continueButton = (Button) findViewById(R.id.continueButton);
         final Button quitButton = (Button) findViewById(R.id.quit);
         final Button saveButton = (Button) findViewById(R.id.save);
-
         final TextView score = (TextView) findViewById(R.id.score);
 
         score.setText("Score " + extractScoreFromIntentExtras());
@@ -29,7 +28,7 @@ public class ContinueScreenActivity extends AppCompatActivity {
                 new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent countDownIntent = new Intent(v.getContext(), CountDownScreenActivity.class);
+                        Intent countDownIntent = new Intent(v.getContext(), StartScreenActivity.class);
                         startActivity(countDownIntent);
                     }
                 });
@@ -38,7 +37,8 @@ public class ContinueScreenActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ContinueScreenActivity.this.finish();
+                        Intent countDownIntent = new Intent(v.getContext(), StartScreenActivity.class);
+                        startActivity(countDownIntent);
                     }
                 }
         );
@@ -47,12 +47,11 @@ public class ContinueScreenActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ContinueScreenActivity.this.finish();
+                        Intent countDownIntent = new Intent(v.getContext(), StartScreenActivity.class);
+                        startActivity(countDownIntent);
                     }
                 }
         );
-
-
     }
 
     private String extractScoreFromIntentExtras() {
