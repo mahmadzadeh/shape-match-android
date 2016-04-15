@@ -23,7 +23,7 @@
         android:gravity="center" />
 
     <Button
-        android:id="@+id/save"
+        android:id="@+id/saveScore"
         android:layout_below="@+id/score"
         android:layout_width="150dp"
         android:layout_height="78dp"
@@ -37,7 +37,7 @@
 
     <Button
         android:id="@+id/continueButton"
-        android:layout_toRightOf="@+id/save"
+        android:layout_toRightOf="@+id/saveScore"
         android:layout_below="@+id/score"
         android:layout_width="150dp"
         android:layout_height="78dp"

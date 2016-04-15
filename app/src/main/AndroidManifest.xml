@@ -10,37 +10,42 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.StartScreenActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="landscape"
-            android:configChanges="orientation|keyboardHidden">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.CountDownScreenActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden"
-            android:noHistory="true">
-        </activity>
+            android:label="@string/countdown_title"
+            android:noHistory="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ui.GameScreenActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden"
-            android:noHistory="true"></activity>
+            android:noHistory="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.ContinueScreenActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden"
-            android:noHistory="true">
-        </activity>
+            android:label="@string/app_name"
+            android:noHistory="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.ChartActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_chart"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

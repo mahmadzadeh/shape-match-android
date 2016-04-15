@@ -19,7 +19,7 @@ public class ContinueScreenActivity extends AppCompatActivity {
 
         final Button continueButton = (Button) findViewById(R.id.continueButton);
         final Button quitButton = (Button) findViewById(R.id.quit);
-        final Button saveButton = (Button) findViewById(R.id.save);
+        final Button saveButton = (Button) findViewById(R.id.saveScore);
         final TextView score = (TextView) findViewById(R.id.score);
 
         score.setText("Score " + extractScoreFromIntentExtras());
@@ -47,7 +47,7 @@ public class ContinueScreenActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent countDownIntent = new Intent(v.getContext(), StartScreenActivity.class);
+                        Intent countDownIntent = new Intent(v.getContext(), ChartActivity.class);
                         startActivity(countDownIntent);
                     }
                 }
