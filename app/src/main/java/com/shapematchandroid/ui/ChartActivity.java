@@ -77,7 +77,7 @@ public class ChartActivity extends AppCompatActivity {
 //                set1.setFillDrawable(drawable);
 //            }
 //            else {
-                set1.setFillColor(Color.YELLOW);
+                set1.setFillColor(Color.GREEN);
 //            }
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
