@@ -26,13 +26,14 @@ public class FileBasedDaoTest {
     public void canCreateAnInstance() {
 
         Dao dao = new FileBasedDao(mockFileIO);
-
     }
 
     @Ignore
-    public void givenNothingStoredInScoreFileThenReadReturnsUserDataWithNothingInIt() {
+    public void givenNothingStoredInScoreFileThenReadReturnsEmptyListOfDataPoints() {
 
         Dao dao = new FileBasedDao(mockFileIO);
+
+
 
         assertThat( dao.read(), not(nullValue()));
     }
