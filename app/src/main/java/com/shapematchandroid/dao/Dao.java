@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface Dao {
 
-    List<DataPoint> read();
+    DataDto read();
 
     void write(List<DataPoint> data);
 

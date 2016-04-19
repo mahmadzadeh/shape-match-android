@@ -1,8 +1,16 @@
 package com.shapematchandroid.dao;
 
-import com.shapematchandroid.io.FileIO;
+import android.util.Log;
 
+import com.shapematchandroid.io.FileIO;
+import com.shapematchandroid.io.FileIOException;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.shapematchandroid.JSONUtil.parse;
 
 public class FileBasedDao implements Dao {
 
@@ -13,8 +21,20 @@ public class FileBasedDao implements Dao {
     }
 
     @Override
-    public List<DataPoint> read() {
-        return null;
+    public DataDto read() {
+        List<DataPoint> dataPoints = new ArrayList<>();
+
+        try {
+
+            dataPoints.addAll(parse(fileIO.read()));
+
+        } catch (FileIOException e) {
+            Log.e("PARSE_ERROR", e.getMessage());
+        } catch (JSONException e) {
+            Log.e("JSON_ERROR", e.getMessage());
+        }
+
+        return new DataDto(dataPoints);
     }
 
     @Override

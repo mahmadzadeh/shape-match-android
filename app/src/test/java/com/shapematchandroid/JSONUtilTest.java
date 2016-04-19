@@ -4,16 +4,20 @@ package com.shapematchandroid;
 import com.shapematchandroid.dao.DataPoint;
 import com.shapematchandroid.io.FileIO;
 import com.shapematchandroid.io.FileIOException;
+import com.shapematchandroid.util.DateUtil;
 
 import org.json.JSONException;
 import org.junit.Test;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class JSONUtilTest {
 
@@ -34,8 +38,30 @@ public class JSONUtilTest {
 
         List<DataPoint> dataPointList = JSONUtil.parse(JSON);
 
-        assertEquals(1, dataPointList.size());
+        DataPoint dataPoint = dataPointList.get(0);
+        String expectedDateFormatted = new SimpleDateFormat(DateUtil.FORMAT_PATTERN).format(dataPoint.date());
+
+        assertThat(expectedDateFormatted, is(equalTo("2012-04-23T18:25:43")));
+        assertThat(dataPoint.score(), is(equalTo(2)));
     }
 
+    @Test
+    public void givenJSONStringWithMultipleDataPointThenParsReturnsListOfOneDataPoints() throws FileIOException, JSONException {
 
+        String JSON = new FileIO(new File("src/test/resources/sampleFile.json")).read();
+
+        List<DataPoint> dataPointList = JSONUtil.parse(JSON);
+
+        assertThat(dataPointList.size(), is(equalTo(4)));
+    }
+
+    @Test
+    public void givenEmptyListDataPointsThenAsStringReturnsStringRepesentation() throws FileIOException, JSONException {
+
+        List<DataPoint> dataPoints = new ArrayList<DataPoint>();
+
+        String str  = JSONUtil.asJSONString(dataPoints);
+
+        assertThat(str, is(equalTo("{ \"data\": [] }")));
+    }
 }

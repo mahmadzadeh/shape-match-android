@@ -76,7 +76,7 @@ public class FileIO implements IO {
             try {
                 stream.close();
             } catch (IOException e) {
-                throw new FileIOException("Unable to close file " + file, e);
+                throw new FileIOException("Unable to close (after writing) file " + file, e);
             }
         }
     }

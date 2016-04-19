@@ -1,7 +1,10 @@
 package com.shapematchandroid.dao;
 
+import org.json.JSONException;
 
 import java.util.Date;
+
+import static com.shapematchandroid.util.DtoToJSONConversion.dataPointToJSON;
 
 public class DataPoint {
 
@@ -13,16 +16,24 @@ public class DataPoint {
         this.score = score;
     }
 
-    public Date getDate() {
+    public Date date() {
         return date;
     }
 
-    public int getScore() {
+    public int score() {
         return score;
     }
 
     @Override
     public String toString() {
-        return "data point with date: "+ date.toString() + " and score: " + score;
+        return "data point with date: " + date.toString() + " and score: " + score;
+    }
+
+    public String toJSON() {
+        try {
+            return dataPointToJSON(this).toString();
+        } catch (JSONException e) {
+            return "";
+        }
     }
 }
