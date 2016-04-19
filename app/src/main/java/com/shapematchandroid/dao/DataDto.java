@@ -4,7 +4,7 @@ import org.json.JSONException;
 
 import java.util.List;
 
-import static com.shapematchandroid.util.DtoToJSONConversion.dataDtoToJSON;
+import static com.shapematchandroid.util.DtoJSONConversion.dataDtoToJSON;
 
 public class DataDto {
 

@@ -13,7 +13,7 @@ import static com.shapematchandroid.JSONUtil.DATA_ELEMENT;
 import static com.shapematchandroid.JSONUtil.DATE_ELEMENT;
 import static com.shapematchandroid.JSONUtil.SCORE_ELEMENT;
 
-public class DtoToJSONConversion {
+public class DtoJSONConversion {
 
     public static JSONObject dataPointToJSON(DataPoint dataPoint) throws JSONException {
 

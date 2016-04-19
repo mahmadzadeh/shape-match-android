@@ -4,7 +4,7 @@ import org.json.JSONException;
 
 import java.util.Date;
 
-import static com.shapematchandroid.util.DtoToJSONConversion.dataPointToJSON;
+import static com.shapematchandroid.util.DtoJSONConversion.dataPointToJSON;
 
 public class DataPoint {
 
