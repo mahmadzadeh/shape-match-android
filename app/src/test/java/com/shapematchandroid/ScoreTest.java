@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class ScoreTest {
 
     @Test
-    public void givenCurrentSooreWhenCorrectAnswerGivenThenPointsAddedToCurrentScor(){
+    public void givenCurrentScoreWhenCorrectAnswerGivenThenPointsAddedToCurrentScore(){
         Score score = new Score(10);
         assertEquals( 20, score.add(10).points());
     }
