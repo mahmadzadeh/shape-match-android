@@ -4,15 +4,16 @@ import com.shapematchandroid.io.FileIO;
 import com.shapematchandroid.io.FileIOException;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import java.util.ArrayList;
+
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -77,11 +78,15 @@ public class FileBasedDaoTest {
         assertThat(dataPoint.score(), is(equalTo(2)));
     }
 
-    @Ignore
-    public void givenNothingStoredInScoreFileThenReadReturnsEmptyListOfDataPoints() {
+    @Test
+    public void givenDataDtoWithNoDataPointThenWriteMethodWritesJSONWithNoDataPoints() throws FileIOException {
 
         Dao dao = new FileBasedDao(mockFileIO);
 
-        assertThat( dao.read(), not(nullValue()));
+        doNothing().when(mockFileIO).write(anyString());
+
+        dao.write(new DataDto(new ArrayList<DataPoint>()));
+
+        verify(mockFileIO).write(anyString());
     }
 }

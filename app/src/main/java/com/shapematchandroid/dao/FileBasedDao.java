@@ -10,7 +10,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.shapematchandroid.JSONUtil.parse;
+import static com.shapematchandroid.util.JSONUtil.parse;
 
 public class FileBasedDao implements Dao {
 
@@ -38,13 +38,16 @@ public class FileBasedDao implements Dao {
     }
 
     @Override
-    public void write(List<DataPoint> dataPoints) {
-//
-//        FileOutputStream stream = new FileOutputStream(file);
-//        try {
-//            stream.write("text-to-write".getBytes());
-//        } finally {
-//            stream.close();
-//        }
+    public void write(DataDto dataDto) {
+
+        String JSON = dataDto.toJSON();
+
+        try {
+
+            fileIO.write(JSON);
+
+        } catch (FileIOException e) {
+            Log.e("FILE_IO_EXCEPTION", e.getMessage());
+        }
     }
 }

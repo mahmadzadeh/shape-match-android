@@ -1,8 +1,7 @@
-package com.shapematchandroid;
+package com.shapematchandroid.util;
 
 
 import com.shapematchandroid.dao.DataPoint;
-import com.shapematchandroid.util.DateUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,9 +36,5 @@ public class JSONUtil {
         }
 
         return dataPoints;
-    }
-
-    public static String asJSONString(List<DataPoint> dataPoints) {
-        return null;
     }
 }

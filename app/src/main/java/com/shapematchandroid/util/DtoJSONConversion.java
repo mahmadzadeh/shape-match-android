@@ -8,10 +8,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.shapematchandroid.JSONUtil.DATAPOINT_ELEMENT;
-import static com.shapematchandroid.JSONUtil.DATA_ELEMENT;
-import static com.shapematchandroid.JSONUtil.DATE_ELEMENT;
-import static com.shapematchandroid.JSONUtil.SCORE_ELEMENT;
+import static com.shapematchandroid.util.JSONUtil.DATAPOINT_ELEMENT;
+import static com.shapematchandroid.util.JSONUtil.DATA_ELEMENT;
+import static com.shapematchandroid.util.JSONUtil.DATE_ELEMENT;
+import static com.shapematchandroid.util.JSONUtil.SCORE_ELEMENT;
 
 public class DtoJSONConversion {
 

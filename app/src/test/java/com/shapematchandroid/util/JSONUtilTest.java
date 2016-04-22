@@ -1,17 +1,15 @@
-package com.shapematchandroid;
+package com.shapematchandroid.util;
 
 
 import com.shapematchandroid.dao.DataPoint;
 import com.shapematchandroid.io.FileIO;
 import com.shapematchandroid.io.FileIOException;
-import com.shapematchandroid.util.DateUtil;
 
 import org.json.JSONException;
 import org.junit.Test;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertTrue;
@@ -53,15 +51,5 @@ public class JSONUtilTest {
         List<DataPoint> dataPointList = JSONUtil.parse(JSON);
 
         assertThat(dataPointList.size(), is(equalTo(4)));
-    }
-
-    @Test
-    public void givenEmptyListDataPointsThenAsStringReturnsStringRepesentation() throws FileIOException, JSONException {
-
-        List<DataPoint> dataPoints = new ArrayList<DataPoint>();
-
-        String str  = JSONUtil.asJSONString(dataPoints);
-
-        assertThat(str, is(equalTo("{ \"data\": [] }")));
     }
 }
