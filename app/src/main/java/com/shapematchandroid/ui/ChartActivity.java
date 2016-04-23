@@ -3,6 +3,7 @@ package com.shapematchandroid.ui;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -21,8 +22,11 @@ public class ChartActivity extends AppCompatActivity {
         setContentView(R.layout.chart_screen);
 
         LineChart lineChart  = (LineChart) findViewById(R.id.line_chart);
-
         setData(45, 100, lineChart);
+
+        Button continueButton  = (Button) findViewById(R.id.char_continue);
+
+
     }
 
     private void setData(int count, float range, LineChart mChart) {
