@@ -10,11 +10,11 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/line_chart"
         android:layout_width="match_parent"
-        android:layout_height="220dp"></com.github.mikephil.charting.charts.LineChart>
+        android:layout_height="220dp"/>
 
     <Button
         android:id="@+id/char_continue"
-        android:layout_width="150dp"
+        android:layout_width="300dp"
         android:layout_height="78dp"
         android:layout_below="@+id/line_chart"
         android:layout_centerHorizontal="true"

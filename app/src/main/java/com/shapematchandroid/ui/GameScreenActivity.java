@@ -71,11 +71,11 @@ public class GameScreenActivity extends AppCompatActivity {
         uiElements.setQuitButtonClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent countDownIntent = new Intent(GameScreenActivity.this, ContinueScreenActivity.class);
+                Intent continuScreenIntent = new Intent(GameScreenActivity.this, ContinueScreenActivity.class);
 
-                countDownIntent.putExtra(GameScreenActivity.FINAL_SCORE, GameScreenActivity.this.currentPoints());
+                continuScreenIntent.putExtra(GameScreenActivity.FINAL_SCORE, GameScreenActivity.this.currentPoints());
 
-                GameScreenActivity.this.startActivity(countDownIntent);
+                GameScreenActivity.this.startActivity(continuScreenIntent);
             }
         });
 

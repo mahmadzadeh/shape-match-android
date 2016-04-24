@@ -6,7 +6,7 @@ import java.util.Date;
 
 import static com.shapematchandroid.util.DtoJSONConversion.dataPointToJSON;
 
-public class DataPoint {
+public class DataPoint implements Comparable<DataPoint>{
 
     private final Date date;
     private final int score;
@@ -35,5 +35,10 @@ public class DataPoint {
         } catch (JSONException e) {
             return "";
         }
+    }
+
+    @Override
+    public int compareTo(DataPoint another) {
+        return this.date.after(another.date) ? 1 : (this.date.before(another.date) ? -1 : 0);
     }
 }
