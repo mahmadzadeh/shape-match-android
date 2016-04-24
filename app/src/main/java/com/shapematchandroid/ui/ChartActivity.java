@@ -8,17 +8,19 @@ import android.view.View;
 import android.widget.Button;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.shapematchandroid.R;
+import com.shapematchandroid.dao.ChartData;
 import com.shapematchandroid.dao.Dao;
 import com.shapematchandroid.dao.DataDto;
+import com.shapematchandroid.dao.DataDtoConversion;
 import com.shapematchandroid.dao.DataPoint;
 import com.shapematchandroid.dao.FileBasedDao;
 import com.shapematchandroid.io.FileIO;
 import com.shapematchandroid.util.DateUtil;
+import com.shapematchandroid.util.FileUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,12 +28,15 @@ import java.util.Date;
 
 public class ChartActivity extends AppCompatActivity {
 
-    Dao dao = new FileBasedDao(
-            new FileIO(new File(ChartActivity.this.getFilesDir(), "data.json")));
+    Dao dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        File file = FileUtil.getDataFile(this);
+
+        dao = new FileBasedDao( new FileIO(file) );
 
         setContentView(R.layout.chart_screen);
 
@@ -40,70 +45,43 @@ public class ChartActivity extends AppCompatActivity {
         DataPoint lastDataPoint = extractDatePointFromExtras();
 
         final DataDto allDataSoFar = dao.read().addDataPoint(lastDataPoint);
-        // setData( allDataSoFar )
-        setData(2, 100, lineChart);
+        setData( lineChart, allDataSoFar );
 
         Button continueButton = (Button) findViewById(R.id.char_continue);
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // write the last datapoint to file and move on
-                // dao.write(allDataSoFar);
+                dao.write(allDataSoFar);
                 Intent countDownIntent = new Intent(v.getContext(), StartScreenActivity.class);
                 startActivity(countDownIntent);
             }
         });
     }
 
-    private void setData(int count, float range, LineChart mChart) {
+    private void setData(LineChart mChart, DataDto dto ) {
+        ChartData chartData = DataDtoConversion.convertToChartData(dto);
 
-        ArrayList<String> xVals = new ArrayList<String>();
-        for (int i = 0; i < count; i++) {
-            xVals.add((i) + "");
-        }
-
-        ArrayList<Entry> yVals = new ArrayList<Entry>();
-
-        for (int i = 0; i < count; i++) {
-
-            float mult = (range + 1);
-            float val = (float) (Math.random() * mult) + 3;// + (float)
-            // ((mult *
-            // 0.1) / 10);
-            yVals.add(new Entry(val, i));
-        }
-
-        LineDataSet set1;
-
-        // create a dataset and give it a type
-        set1 = new LineDataSet(yVals, "Scores");
-
-        // set1.setFillAlpha(110);
-
-        // set the line to be drawn like this "- - - - - -"
-        set1.enableDashedLine(10f, 5f, 0f);
-        set1.enableDashedHighlightLine(10f, 5f, 0f);
-        set1.setColor(Color.YELLOW);
-        set1.setCircleColor(Color.YELLOW);
-        set1.setLineWidth(1f);
-        set1.setCircleRadius(3f);
-        set1.setDrawCircleHole(false);
-        set1.setValueTextSize(9f);
-        set1.setDrawFilled(true);
-        set1.setFillColor(Color.GREEN);
+        LineDataSet dataSet = new LineDataSet(chartData.getyVals(), "Scores");
+        dataSet.enableDashedLine(10f, 5f, 0f);
+        dataSet.enableDashedHighlightLine(10f, 5f, 0f);
+        dataSet.setColor(Color.YELLOW);
+        dataSet.setCircleColor(Color.YELLOW);
+        dataSet.setLineWidth(1f);
+        dataSet.setCircleRadius(3f);
+        dataSet.setDrawCircleHole(false);
+        dataSet.setValueTextSize(9f);
+        dataSet.setDrawFilled(true);
+        dataSet.setFillColor(Color.GREEN);
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-        dataSets.add(set1); // add the datasets
+        dataSets.add(dataSet);
 
-        // create a data object with the datasets
-        LineData data = new LineData(xVals, dataSets);
+        LineData data = new LineData(chartData.getxVals(), dataSets);
 
-        // set data
         mChart.setData(data);
         mChart.setBackgroundColor(Color.WHITE);
         mChart.setDescription("Score Data");
-
     }
 
     private DataPoint extractDatePointFromExtras() {
@@ -113,8 +91,8 @@ public class ChartActivity extends AppCompatActivity {
         Date date = new Date();
 
         if (extras != null) {
-            score = extras.getInt(GameScreenActivity.FINAL_SCORE);
-            date = DateUtil.parse(extras.getString(ContinueScreenActivity.DATE));
+            score = Integer.valueOf(extras.getString(GameScreenActivity.FINAL_SCORE));
+            date  = DateUtil.parse(extras.getString(ContinueScreenActivity.DATE));
         }
         return new DataPoint(date,score);
     }
