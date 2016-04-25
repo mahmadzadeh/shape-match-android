@@ -1,6 +1,5 @@
 package com.shapematchandroid.ui;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,7 +13,6 @@ import com.shapematchandroid.R;
 import com.shapematchandroid.dao.ChartData;
 import com.shapematchandroid.dao.Dao;
 import com.shapematchandroid.dao.DataDto;
-import com.shapematchandroid.dao.DataDtoConversion;
 import com.shapematchandroid.dao.DataPoint;
 import com.shapematchandroid.dao.FileBasedDao;
 import com.shapematchandroid.io.FileIO;
@@ -25,6 +23,10 @@ import com.shapematchandroid.util.StartScreenActivityIntentUtil;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static com.shapematchandroid.dao.DataDtoConversion.convertToChartData;
+import static com.shapematchandroid.util.ChartUtil.dataSetForYAxis;
+import static com.shapematchandroid.util.ChartUtil.setUpChart;
 
 public class ChartActivity extends AppCompatActivity {
 
@@ -59,28 +61,15 @@ public class ChartActivity extends AppCompatActivity {
     }
 
     private void setData(LineChart mChart, DataDto dto ) {
-        ChartData chartData = DataDtoConversion.convertToChartData(dto);
 
-        LineDataSet dataSet = new LineDataSet(chartData.getyVals(), "Scores");
-        dataSet.enableDashedLine(10f, 5f, 0f);
-        dataSet.enableDashedHighlightLine(10f, 5f, 0f);
-        dataSet.setColor(Color.YELLOW);
-        dataSet.setCircleColor(Color.YELLOW);
-        dataSet.setLineWidth(1f);
-        dataSet.setCircleRadius(3f);
-        dataSet.setDrawCircleHole(false);
-        dataSet.setValueTextSize(9f);
-        dataSet.setDrawFilled(true);
-        dataSet.setFillColor(Color.GREEN);
+        ChartData chartData = convertToChartData(dto);
+
+        LineDataSet dataSet = dataSetForYAxis(chartData.getyVals());
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         dataSets.add(dataSet);
 
-        LineData data = new LineData(chartData.getxVals(), dataSets);
-
-        mChart.setData(data);
-        mChart.setBackgroundColor(Color.WHITE);
-        mChart.setDescription("Score Data");
+        setUpChart(mChart, new LineData(chartData.getxVals(), dataSets));
     }
 
     private DataPoint extractDatePointFromExtras() {
