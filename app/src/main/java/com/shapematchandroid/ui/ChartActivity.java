@@ -1,6 +1,5 @@
 package com.shapematchandroid.ui;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +20,7 @@ import com.shapematchandroid.dao.FileBasedDao;
 import com.shapematchandroid.io.FileIO;
 import com.shapematchandroid.util.DateUtil;
 import com.shapematchandroid.util.FileUtil;
+import com.shapematchandroid.util.StartScreenActivityIntentUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -53,8 +53,7 @@ public class ChartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dao.write(allDataSoFar);
-                Intent countDownIntent = new Intent(v.getContext(), StartScreenActivity.class);
-                startActivity(countDownIntent);
+                StartScreenActivityIntentUtil.backToStartScreen(v, ChartActivity.this);
             }
         });
     }

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.shapematchandroid.R;
+import com.shapematchandroid.util.StartScreenActivityIntentUtil;
 
 import java.util.Date;
 
@@ -16,6 +17,7 @@ import static com.shapematchandroid.util.DateUtil.format;
 public class ContinueScreenActivity extends AppCompatActivity {
 
     public static final String DATE = "GAME_DATE";
+    public static final String SCORE_TEXT = "Score ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +31,13 @@ public class ContinueScreenActivity extends AppCompatActivity {
         final TextView score = (TextView) findViewById(R.id.score);
 
         final String actualScore = extractScoreFromIntentExtras();
-        score.setText("Score " + actualScore);
+        score.setText(SCORE_TEXT + actualScore);
 
         continueButton.setOnClickListener(
                 new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent countDownIntent = new Intent(v.getContext(), StartScreenActivity.class);
-                        startActivity(countDownIntent);
+                        StartScreenActivityIntentUtil.backToStartScreen(v, ContinueScreenActivity.this);
                     }
                 });
 
@@ -44,8 +45,7 @@ public class ContinueScreenActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent countDownIntent = new Intent(v.getContext(), StartScreenActivity.class);
-                        startActivity(countDownIntent);
+                        StartScreenActivityIntentUtil.backToStartScreen(v, ContinueScreenActivity.this);
                     }
                 }
         );
