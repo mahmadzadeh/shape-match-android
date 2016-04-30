@@ -53,4 +53,52 @@ public class DataDtoTest {
         assertThat(sorted.get(1).score(), is(equalTo(30)));
         assertThat(sorted.get(2).score(), is(equalTo(10)));
     }
+
+    @Test
+    public void shrinkDataSizeReturnsInstanceWithSmallerDataSize() {
+
+        List<DataPoint> dataPointList = getDataPointListOfSize(DataDto.MAX_DATA_POINT_SIZE + 1);
+
+        DataDto dataDto = new DataDto(dataPointList);
+
+        DataDto shrunkDataDto = dataDto.shrinkDataSize();
+
+        assertThat(shrunkDataDto.userDataPoints().size(), is(equalTo(DataDto.MAX_DATA_POINT_SIZE)));
+    }
+
+    @Test
+    public void givenDataSizeSmallerThandMaxThenDataSizeStaysSame() {
+
+        int size = DataDto.MAX_DATA_POINT_SIZE - 1;
+        List<DataPoint> dataPointList = getDataPointListOfSize(size);
+
+        DataDto dataDto = new DataDto(dataPointList);
+
+        DataDto shrunkDataDto = dataDto.shrinkDataSize();
+
+        assertThat(shrunkDataDto.userDataPoints().size(), is(equalTo(size)));
+    }
+
+    @Test
+    public void givenDataSizeEqualToMaxThenDataSizeStaysSame() {
+
+        int size = DataDto.MAX_DATA_POINT_SIZE;
+        List<DataPoint> dataPointList = getDataPointListOfSize(size);
+
+        DataDto dataDto = new DataDto(dataPointList);
+
+        DataDto shrunkDataDto = dataDto.shrinkDataSize();
+
+        assertThat(shrunkDataDto.userDataPoints().size(), is(equalTo(size)));
+    }
+
+    private List<DataPoint> getDataPointListOfSize(int size) {
+        List<DataPoint> dataPointList = new ArrayList<>();
+
+        for(int i=0; i< size ; ++i) {
+            dataPointList.add(new DataPoint(new Date(), 10));
+        }
+
+        return dataPointList;
+    }
 }

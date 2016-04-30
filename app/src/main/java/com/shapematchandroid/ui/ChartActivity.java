@@ -54,7 +54,7 @@ public class ChartActivity extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dao.write(allDataSoFar);
+                dao.write(allDataSoFar.shrinkDataSize());
                 StartScreenActivityIntentUtil.backToStartScreen(v, ChartActivity.this);
             }
         });

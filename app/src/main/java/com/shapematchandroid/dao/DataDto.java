@@ -10,6 +10,7 @@ import static com.shapematchandroid.util.DtoJSONConversion.dataDtoToJSON;
 
 public class DataDto {
 
+    public static final int MAX_DATA_POINT_SIZE = 40;
     List<DataPoint> userDataPoints;
 
     public DataDto(List<DataPoint> userDataPoints) {
@@ -43,5 +44,12 @@ public class DataDto {
         Collections.sort(sortedCopy);
 
         return sortedCopy;
+    }
+
+    public DataDto shrinkDataSize() {
+        return
+                userDataPoints.size() > MAX_DATA_POINT_SIZE
+                ? new DataDto(this.userDataPoints.subList(0, MAX_DATA_POINT_SIZE))
+                : this;
     }
 }
