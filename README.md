@@ -1,3 +1,3 @@
 # shape-match-android
 
-[sample image!](./sampleImage.png)
+[sample image!](./sampleImage.png) 
