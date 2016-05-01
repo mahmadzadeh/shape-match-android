@@ -1,3 +1,4 @@
 # shape-match-android
 
-[sample image!](./sampleImage.png) 
+[Screenshot of main game screen](./sampleImage.png) 
+[Score stat graph](./sampleGraph.png) 

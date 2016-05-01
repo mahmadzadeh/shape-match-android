@@ -2,7 +2,7 @@ package com.shapematchandroid.util;
 
 public class DisplayWindow {
     public static final double LEFT_GUTTER_WIDTH_PERCENTAGE = 0.02;
-    public static final double LEFT_GUTTER_HEIGHT_PERCENTAGE = 0.15;
+    public static final double LEFT_GUTTER_HEIGHT_PERCENTAGE = 0.10;
 
     public static final double LEFT_BUTTON_WIDTH_PERCENTAGE = 0.026;
     public static final double LEFT_BUTTON_HEIGHT_PERCENTAGE = 0.65;
@@ -11,7 +11,7 @@ public class DisplayWindow {
     public static final double LEFT_GRID_HEIGHT_PERCENTAGE =0.15;
 
     public static final double RIGHT_GRID_WIDTH_PERCENTAGE = 0.61;
-    public static final double RIGHT_GRID_HEIGHT_PERCENTAGE =0.15;
+    public static final double RIGHT_GRID_HEIGHT_PERCENTAGE = LEFT_GUTTER_HEIGHT_PERCENTAGE;
 
     public static final double RIGHT_BUTTON_WIDTH_PERCENTAGE = 0.527;
     public static final double RIGHT_BUTTON_HEIGHT_PERCENTAGE = 0.65;
