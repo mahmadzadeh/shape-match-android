@@ -4,7 +4,7 @@ public class DisplayWindow {
     public static final double LEFT_GUTTER_WIDTH_PERCENTAGE = 0.02;
     public static final double LEFT_GUTTER_HEIGHT_PERCENTAGE = 0.15;
 
-    public static final double LEFT_BUTTON_WIDTH_PERCENTAGE = 0.20;
+    public static final double LEFT_BUTTON_WIDTH_PERCENTAGE = 0.026;
     public static final double LEFT_BUTTON_HEIGHT_PERCENTAGE = 0.65;
 
     public static final double LEFT_GRID_WIDTH_PERCENTAGE = 0.35;
@@ -13,14 +13,14 @@ public class DisplayWindow {
     public static final double RIGHT_GRID_WIDTH_PERCENTAGE = 0.61;
     public static final double RIGHT_GRID_HEIGHT_PERCENTAGE =0.15;
 
-    public static final double RIGHT_BUTTON_WIDTH_PERCENTAGE = 0.53;
+    public static final double RIGHT_BUTTON_WIDTH_PERCENTAGE = 0.527;
     public static final double RIGHT_BUTTON_HEIGHT_PERCENTAGE = 0.65;
 
     public static final double SINGLE_DISPLAY_CELL_WIDTH_PERCENTAGE = 0.053;
     public static final double SINGLE_DISPLAY_CELL_HEIGHT_PERCENTAGE = 0.067;
 
-    public static final double BUTTON_WIDTH_PERCENTAGE = 0.22;
-    public static final double BUTTON_HEIGHT_PERCENTAGE = 0.20;
+    public static final double BUTTON_WIDTH_PERCENTAGE = 0.395;
+    public static final double BUTTON_HEIGHT_PERCENTAGE = 0.30;
 
     public static final double GAP_BETWEEN_GRIDS_PERCENTAGE = 0.22;
     public static final double FUDGE_FACTOR = 0.006;

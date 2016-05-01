@@ -9,16 +9,15 @@ import static com.shapematchandroid.grid.CellGridUtil.getShapesForLevel;
 
 /**
  * Immutable
- * */
+ */
 public class GameLogic {
 
-    private final static int INITIAL_CORRECT_ANSWERS = 0;
-
     public final static int REQUIRED_CORRECT_CONSECUTIVE_ANSWERS = 2;
+    private final static int INITIAL_CORRECT_ANSWERS = 0;
     public static GameLogic initialState = new GameLogic(
             GameLevel.initialLevel,
             getShapesForLevel(GameLevel.initialLevel),
-            INITIAL_CORRECT_ANSWERS,Score.initialScore,
+            INITIAL_CORRECT_ANSWERS, Score.initialScore,
             false);
 
     private final GameLevel currentLevel;
@@ -41,11 +40,11 @@ public class GameLogic {
         return gameLogicBasedOnUserSelection(isCorrectAnswerGiven);
     }
 
-    private GameLogic gameLogicBasedOnUserSelection( Boolean isCorrectAnswer ) {
+    private GameLogic gameLogicBasedOnUserSelection(Boolean isCorrectAnswer) {
         if (isCorrectAnswer) {
             GameLevel level = determineGameLevel();
             int corrAnswers = determineCorrectAnswerCount(level);
-           return new GameLogic(
+            return new GameLogic(
                     level,
                     getShapesForLevel(level),
                     corrAnswers,
@@ -61,14 +60,14 @@ public class GameLogic {
         }
     }
 
-    private int determineCorrectAnswerCount(GameLevel level ) {
-        return level == currentLevel? correctAnswers + 1:  0;
+    private int determineCorrectAnswerCount(GameLevel level) {
+        return level == currentLevel ? correctAnswers + 1 : 0;
     }
 
     private GameLevel determineGameLevel() {
         return correctAnswers == (REQUIRED_CORRECT_CONSECUTIVE_ANSWERS - 1)
                 ? currentLevel.nextLevel()
-                :currentLevel;
+                : currentLevel;
     }
 
     public GameLevel currentLevel() {
@@ -92,11 +91,11 @@ public class GameLogic {
     }
 
     public boolean isGameOver() {
-        return  isGameOver;
+        return isGameOver;
     }
 
     public boolean isMatchingPairShapes() {
-        return  cellGridPair.leftGrid().equals(cellGridPair.rightGrid());
+        return cellGridPair.leftGrid().equals(cellGridPair.rightGrid());
     }
 
     public GameLogic markGameAsFinished() {
