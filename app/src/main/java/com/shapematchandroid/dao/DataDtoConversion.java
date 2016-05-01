@@ -13,7 +13,7 @@ public class DataDtoConversion {
         ArrayList<String> xVals = new ArrayList<>();
         ArrayList<Entry> yVals = new ArrayList<>();
 
-        for (DataPoint dataPoint : dataDto.sortedDataPoints()) {
+        for (DataPoint dataPoint : dataDto.userDataPoints()) {
             xVals.add(formatForChartUI(dataPoint.date()));
             yVals.add(new Entry(dataPoint.score(), xVals.size() - 1));
         }

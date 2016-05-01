@@ -37,7 +37,7 @@ public class DataDtoTest {
     public void sortUserDataPointsBasedOnDataPointDate() throws JSONException {
         Date today = new Date();
         Date yesterdayThisTime = new Date(today.getTime() - 86400000l);
-        Date twoDaysAgoThisTime= new Date(yesterdayThisTime.getTime() - 86400000l);
+        Date twoDaysAgoThisTime = new Date(yesterdayThisTime.getTime() - 86400000l);
 
         List<DataPoint> dataPointList = Arrays.asList(
                 new DataPoint(today, 10),
@@ -47,7 +47,7 @@ public class DataDtoTest {
 
         DataDto dataDto = new DataDto(dataPointList);
 
-        List<DataPoint> sorted = dataDto.sortedDataPoints();
+        List<DataPoint> sorted = dataDto.sortedDataPoints().userDataPoints();
 
         assertThat(sorted.get(0).score(), is(equalTo(20)));
         assertThat(sorted.get(1).score(), is(equalTo(30)));
@@ -57,7 +57,8 @@ public class DataDtoTest {
     @Test
     public void shrinkDataSizeReturnsInstanceWithSmallerDataSize() {
 
-        List<DataPoint> dataPointList = getDataPointListOfSize(DataDto.MAX_DATA_POINT_SIZE + 1);
+        int size = DataDto.MAX_DATA_POINT_SIZE + 1;
+        List<DataPoint> dataPointList = getDataPointListOfSize(size);
 
         DataDto dataDto = new DataDto(dataPointList);
 
@@ -95,7 +96,7 @@ public class DataDtoTest {
     private List<DataPoint> getDataPointListOfSize(int size) {
         List<DataPoint> dataPointList = new ArrayList<>();
 
-        for(int i=0; i< size ; ++i) {
+        for (int i = 0; i < size; ++i) {
             dataPointList.add(new DataPoint(new Date(), 10));
         }
 

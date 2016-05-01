@@ -46,7 +46,7 @@ public class ChartActivity extends AppCompatActivity {
 
         DataPoint lastDataPoint = extractDatePointFromExtras();
 
-        final DataDto allDataSoFar = dao.read().addDataPoint(lastDataPoint);
+        final DataDto allDataSoFar = dao.read().sortedDataPoints().addDataPoint(lastDataPoint);
         setData( lineChart, allDataSoFar );
 
         Button continueButton = (Button) findViewById(R.id.char_continue);
