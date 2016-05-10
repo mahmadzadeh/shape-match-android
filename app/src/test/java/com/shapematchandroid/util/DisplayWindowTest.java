@@ -22,7 +22,7 @@ public class DisplayWindowTest {
         CellMargin margin = window.topLeftCornerOfLeftGrid();
 
         assertEquals(20.0, margin.getLeftMargin());
-        assertEquals(270.0, margin.getTopMargin());
+        assertEquals(180.0, margin.getTopMargin());
     }
 
     @Test
@@ -33,7 +33,7 @@ public class DisplayWindowTest {
         CellMargin margin = window.topLeftCornerOfRightGrid();
 
         assertEquals(610.0, margin.getLeftMargin());
-        assertEquals(270.0, margin.getTopMargin());
+        assertEquals(180.0, margin.getTopMargin());
     }
 
     @Test
@@ -43,7 +43,7 @@ public class DisplayWindowTest {
 
         CellMargin margin = window.topLeftCornerOfLeftButton();
 
-        assertEquals(200.0, margin.getLeftMargin());
+        assertEquals(26.0, margin.getLeftMargin());
         assertEquals(1170.0, margin.getTopMargin());
     }
 
@@ -53,7 +53,7 @@ public class DisplayWindowTest {
 
         CellMargin margin = window.topLeftCornerOfRightButton();
 
-        assertEquals(530.0, margin.getLeftMargin());
+        assertEquals(527.0, margin.getLeftMargin());
         assertEquals(1170.0, margin.getTopMargin());
     }
 
